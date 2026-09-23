@@ -2,6 +2,15 @@
 
 ## 23.09.2026
 
+- Benennungsregel für Allianz-Mitteilungen auf `Event_Message` ohne numerisches Präfix präzisiert
+- unvollständig benanntes Chatbild anhand seines Inhalts als `Entscheidungshelfer` mit den drei Hauptfiguren benannt
+- ersten vollständigen Benennungscheck ausgeführt und drei eindeutig abweichende Bilddateien regelkonform umbenannt
+- explizit aufrufbaren Codex-Skill `$zroute-naming-check` für wiederholbare Benennungsprüfungen eingerichtet
+- Zweckdateien aller Bereiche um verbindliche, lokal prüfbare Benennungsregeln ergänzt
+- Zweckdateien aller Hauptbereiche in der Root-README verlinkt
+- Zweckdateien für alle nummerierten Hauptordner und den Chibi-Unterordner ergänzt
+- Ordner `Allianz-Mitteilung Bilder` aufgelöst und die vorhandene Raubzug-Mitteilung unter `07_Allianz` integriert und aussagekräftig benannt
+- leeren redundanten Altordner `Charaktermodelle` entfernt
 - Chibi-Stil als eigenständige humorvolle Variante für Chatbilder dokumentiert
 - Unterordner `05_Chatbilder/Chibi` angelegt
 - exemplarisches Chibi-Bild von Somea und Anthlan in den neuen Unterordner verschoben

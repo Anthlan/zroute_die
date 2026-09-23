@@ -5,6 +5,7 @@ Dieses Repository ist die zentrale, strukturierte Sammlung von Inhalten rund um 
 ## Einstieg
 
 - [Projektübersicht und Ablageregeln](00_Einstieg/START_HERE.md)
+- [Zweck des Einstiegsbereichs](00_Einstieg/00_purpose.md)
 - [Allgemeine Informationen und Rahmenparameter](00_Einstieg/Allgemeine%20Informationen%20und%20Rahmenparameter.md)
 - [Änderungsverlauf](00_Einstieg/Changelog.md)
 - [Design-Guidelines](06_Design-Guidelines)
@@ -13,16 +14,16 @@ Dieses Repository ist die zentrale, strukturierte Sammlung von Inhalten rund um 
 
 | Ordner | Inhalt |
 | --- | --- |
-| `01_Tips` | Kurze, direkt teilbare Allianz-Tipps mit Text und Grafik |
-| `02_Anleitungen` | Ausführlichere Schritt-für-Schritt-Anleitungen |
-| `03_Avatare` | Fertige Profil- und Avatarbilder der Spieler |
-| `04_Charaktermodelle` | Verbindliche visuelle Referenzen für wiederkehrende Figuren |
-| `05_Chatbilder` | Szenen, Memes und humorvolle Chatbilder einschließlich Chibi-Reaktionsbildern |
-| `06_Design-Guidelines` | Gestaltungs- und Textregeln für konsistente DlE-Inhalte |
-| `07_Allianz` | Regeln, Rollen, Kommunikationsstrategie und wiederverwendbare Allianztexte |
-| `08_Strategien` | Taktische Planungen und Kampfkonzepte |
-| `09_Analysen` | Event-, Kampf-, Account- und Serverauswertungen |
-| `99_Archiv` | Ersetzte, veraltete oder historisch relevante Inhalte |
+| [`01_Tips`](01_Tips/01_purpose.md) | Kurze, direkt teilbare Allianz-Tipps mit Text und Grafik |
+| [`02_Anleitungen`](02_Anleitungen/02_purpose.md) | Ausführlichere Schritt-für-Schritt-Anleitungen |
+| [`03_Avatare`](03_Avatare/03_purpose.md) | Fertige Profil- und Avatarbilder der Spieler |
+| [`04_Charaktermodelle`](04_Charaktermodelle/04_purpose.md) | Verbindliche visuelle Referenzen für wiederkehrende Figuren |
+| [`05_Chatbilder`](05_Chatbilder/05_purpose.md) | Szenen, Memes und humorvolle Chatbilder einschließlich Chibi-Reaktionsbildern |
+| [`06_Design-Guidelines`](06_Design-Guidelines/06_purpose.md) | Gestaltungs- und Textregeln für konsistente DlE-Inhalte |
+| [`07_Allianz`](07_Allianz/07_purpose.md) | Regeln, Rollen, Kommunikationsstrategie und wiederverwendbare Allianztexte |
+| [`08_Strategien`](08_Strategien/08_purpose.md) | Taktische Planungen und Kampfkonzepte |
+| [`09_Analysen`](09_Analysen/09_purpose.md) | Event-, Kampf-, Account- und Serverauswertungen |
+| [`99_Archiv`](99_Archiv/99_purpose.md) | Ersetzte, veraltete oder historisch relevante Inhalte |
 
 ## Gestaltungsprinzip
 
