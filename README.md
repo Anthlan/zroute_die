@@ -24,6 +24,12 @@ Jeder Fachordner enthält eine eigene `README.md` mit seinem Zweck, seiner vorge
 | [`09_Analysen`](09_Analysen/README.md) | Event-, Kampf-, Account- und Serverauswertungen |
 | [`99_Archiv`](99_Archiv/README.md) | Ersetzte, veraltete oder historisch relevante Inhalte |
 
+## Inhalte einreichen
+
+Allianzmitglieder können Bilder und Dokumente über die [ZRoute Upload-Inbox](https://www.dropbox.com/request/4ha3swzj8zyl4mez6j8g) einreichen. Für den Upload ist kein Dropbox-Konto erforderlich.
+
+Bitte im Dateinamen nach Möglichkeit den eigenen Spielernamen und einen kurzen Inhaltshinweis angeben. Mit dem Upload muss die Aufnahme der Datei in dieses öffentliche Archiv erlaubt sein. Alle Einsendungen werden vor der Übernahme geprüft, passend benannt und in den vorgesehenen Ordner eingeordnet.
+
 ## Gestaltungsprinzip
 
 Normale Chatbilder verwenden einen hochwertigen, filmischen und halb-realistischen Fantasy-Stil mit stabilen Charaktermodellen, dunkelblau-goldener Farbwelt und warmem Licht. Für bewusst überzeichnete Reaktionen existiert ergänzend ein eigener Chibi-Stil. Die verbindlichen Vorgaben befinden sich unter [`06_Design-Guidelines`](06_Design-Guidelines).
