@@ -45,17 +45,17 @@ Die Schreibweise **DlE** ist für alle spielbezogenen Inhalte verbindlich. **DIE
 
 ### Tipps und Anleitungen
 
-Tipps verwenden einen kurzen, beschreibenden Namen ohne laufende Nummer:
+Tipps verwenden eine zweistellige laufende Nummer und einen kurzen, beschreibenden Namen:
 
 ```text
-Kurztitel.Dateiendung
+Tipp_XX_Kurztitel.Dateiendung
 ```
 
 Text und Bild verwenden denselben Basisnamen:
 
 ```text
-Ueberfall.md
-Ueberfall.png
+Tipp_01_Ueberfall.md
+Tipp_01_Ueberfall.png
 ```
 
 Für Anleitungen wird vorläufig das Thema vorangestellt:

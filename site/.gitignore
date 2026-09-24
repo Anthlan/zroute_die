@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+public/generated/
+public/previews/
+src/data/gallery.generated.json
+src/data/docs.generated.json

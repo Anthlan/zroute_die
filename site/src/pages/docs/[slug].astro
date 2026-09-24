@@ -1,0 +1,150 @@
+---
+import "../../styles/global.css";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import docsData from "../../data/docs.generated.json";
+
+export function getStaticPaths() {
+  return docsData.items.map((document) => ({
+    params: { slug: document.slug },
+    props: { document },
+  }));
+}
+
+const { document } = Astro.props;
+const topLevelSectionDocuments = docsData.items.filter(
+  (item) => item.section === document.section && !item.parentSlug,
+);
+const activeCollectionSlug = document.parentSlug ?? document.slug;
+const childDocuments = docsData.items.filter((item) => item.parentSlug === activeCollectionSlug);
+const sectionDocuments = topLevelSectionDocuments.flatMap((item) =>
+  item.slug === activeCollectionSlug ? [item, ...childDocuments] : [item],
+);
+const activeSection = document.section === "Gestaltung"
+  ? "gestaltung"
+  : document.section === "Allianz"
+    ? "allianz"
+    : "wissen";
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={document.summary} />
+    <link rel="icon" type="image/svg+xml" href="/zroute_die/favicon.svg" />
+    <title>{document.title} · DIE-Allianzarchiv</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <SiteHeader active={activeSection} />
+
+      <main class="document-main" id="main-content">
+        <nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+          <a href="/zroute_die/">Start</a>
+          <span aria-hidden="true">/</span>
+          <a href="/zroute_die/docs/">Dokumentation</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{document.title}</span>
+        </nav>
+
+        <div class:list={["document-layout", { "is-knowledge-page": document.imageUrl }]}>
+          <aside class="document-sidebar">
+            <p class="eyebrow">{document.section}</p>
+            <a class="docs-overview-link" href="/zroute_die/docs/">← Alle Dokumente</a>
+            {sectionDocuments.length > 0 && (
+              <nav class="document-section-nav" aria-label={`Weitere Dokumente aus ${document.section}`}>
+                <span>In diesem Bereich</span>
+                {sectionDocuments.map((item) => (
+                  <a
+                    class:list={[{ "is-current": item.slug === document.slug, "is-child": item.parentSlug }]}
+                    href={item.url}
+                    aria-current={item.slug === document.slug ? "page" : undefined}
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </nav>
+            )}
+            {sectionDocuments.length > 0 && (
+              <details class="document-mobile-nav">
+                <summary>
+                  <span>In diesem Bereich</span>
+                  <strong>{document.title}</strong>
+                </summary>
+                <nav aria-label={`Dokumente aus ${document.section}`}>
+                  {sectionDocuments.map((item) => (
+                    <a
+                      class:list={[{ "is-current": item.slug === document.slug, "is-child": item.parentSlug }]}
+                      href={item.url}
+                      aria-current={item.slug === document.slug ? "page" : undefined}
+                    >
+                      {item.title}
+                    </a>
+                  ))}
+                </nav>
+              </details>
+            )}
+          </aside>
+
+          <article class="document-article">
+            <header>
+              <p class="eyebrow">{document.section}</p>
+              <h1>{document.title}</h1>
+              <p>{document.summary}</p>
+              <a href={document.repositoryUrl} target="_blank" rel="noopener noreferrer">
+                Markdown auf GitHub öffnen <span aria-hidden="true">↗</span>
+              </a>
+            </header>
+            {childDocuments.length > 0 && !document.parentSlug && (
+              <section class="knowledge-children" aria-labelledby="knowledge-children-title">
+                <div>
+                  <p class="eyebrow">Wissensseiten</p>
+                  <h2 id="knowledge-children-title">Verfügbare Tipps</h2>
+                </div>
+                <div class="knowledge-card-list">
+                  {childDocuments.map((item) => (
+                    <a class="knowledge-card" href={item.url}>
+                      <div>
+                        <span>Wissen · Tipp</span>
+                        <h3>{item.title}</h3>
+                        <p>{item.summary}</p>
+                        <strong>Wissensseite öffnen →</strong>
+                      </div>
+                      {item.imageUrl && <img src={item.imageUrl} alt="" loading="lazy" />}
+                    </a>
+                  ))}
+                </div>
+              </section>
+            )}
+            {document.kind === "tip" && document.introHtml && document.tipHtml && document.copyHtml ? (
+              <div class="tip-article-body">
+                <section class="markdown-content tip-intro" set:html={document.introHtml} />
+                <div class:list={["tip-main-layout", { "has-aside-image": document.imageUrl }]}> 
+                  <section class="markdown-content tip-main-content" set:html={document.tipHtml} />
+                  {document.imageUrl && (
+                    <aside class="document-visual" aria-label="Zugehörige Tipp-Grafik">
+                      <a href={document.imageRepositoryUrl} target="_blank" rel="noopener noreferrer">
+                        <img src={document.imageUrl} alt={`Grafik zu ${document.title}`} />
+                      </a>
+                      <p>Passende Grafik zum Teilen im Allianzchat.</p>
+                      <a href={document.imageRepositoryUrl} target="_blank" rel="noopener noreferrer">
+                        Originalgrafik auf GitHub öffnen <span aria-hidden="true">↗</span>
+                      </a>
+                    </aside>
+                  )}
+                </div>
+                <section class="markdown-content tip-copy" set:html={document.copyHtml} />
+              </div>
+            ) : (
+              <div class="markdown-content" set:html={document.html} />
+            )}
+          </article>
+        </div>
+      </main>
+
+      <SiteFooter />
+    </div>
+  </body>
+</html>

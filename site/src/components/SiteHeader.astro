@@ -1,0 +1,30 @@
+---
+const { active = "" } = Astro.props;
+const repositoryUrl = "https://github.com/Anthlan/zroute_die";
+const uploadUrl = "https://www.dropbox.com/request/4ha3swzj8zyl4mez6j8g";
+---
+
+<a class="skip-link" href="#main-content">Zum Hauptinhalt springen</a>
+<header class="site-header">
+  <a class="brand" href="/zroute_die/" aria-label="DIE-Allianzarchiv – Startseite">
+    <span class="brand-mark" aria-hidden="true">D<span>I</span>E</span>
+    <span class="brand-copy">
+      <strong>Allianzarchiv</strong>
+      <small>Z:Route · DIE</small>
+    </span>
+  </a>
+
+  <nav aria-label="Hauptnavigation">
+    <a class:list={[{ "is-active": active === "gallery" }]} href="/zroute_die/#galerie">Galerie</a>
+    <a class:list={[{ "is-active": active === "wissen" }]} href="/zroute_die/docs/#wissen">Wissen</a>
+    <a class:list={[{ "is-active": active === "allianz" }]} href="/zroute_die/docs/allianz/">Allianz</a>
+    <a class:list={[{ "is-active": active === "gestaltung" }]} href="/zroute_die/docs/design-guidelines/">Stilguide</a>
+  </nav>
+
+  <div class="header-actions">
+    <a class="repository-link" href={repositoryUrl}>Repository <span aria-hidden="true">↗</span></a>
+    <a class="upload-link" href={uploadUrl} target="_blank" rel="noopener noreferrer">
+      Datei einreichen <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</header>
