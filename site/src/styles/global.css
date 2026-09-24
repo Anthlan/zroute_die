@@ -162,19 +162,23 @@ nav a.is-active::after {
 }
 
 .repository-link,
+.inbox-link,
 .upload-link {
   padding: 10px 14px;
   border-radius: 4px;
   font-size: 13px;
 }
 
-.repository-link {
+.repository-link,
+.inbox-link {
   border: 1px solid var(--line);
   color: var(--gold-pale);
 }
 
 .repository-link:hover,
-.repository-link:focus-visible {
+.repository-link:focus-visible,
+.inbox-link:hover,
+.inbox-link:focus-visible {
   border-color: var(--line-bright);
   background: rgba(227, 173, 78, 0.07);
 }
@@ -191,6 +195,10 @@ nav a.is-active::after {
 .upload-link:focus-visible {
   background: linear-gradient(180deg, #f6d180, #dda13b);
   box-shadow: 0 9px 34px rgba(227, 173, 78, 0.28);
+}
+
+.action-label-short {
+  display: none;
 }
 
 main {
@@ -1384,6 +1392,11 @@ footer a {
     font-size: 12px;
   }
 
+  .inbox-link {
+    padding-inline: 11px;
+    font-size: 12px;
+  }
+
   nav {
     justify-content: start;
     gap: 22px;
@@ -1665,7 +1678,19 @@ footer a {
     display: none;
   }
 
+  .action-label-full {
+    display: none;
+  }
+
+  .action-label-short {
+    display: inline;
+  }
+
   .upload-link {
+    white-space: nowrap;
+  }
+
+  .inbox-link {
     white-space: nowrap;
   }
 
