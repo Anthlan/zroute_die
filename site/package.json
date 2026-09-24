@@ -5,7 +5,9 @@
   "scripts": {
     "gallery": "node scripts/generate-gallery.mjs",
     "docs": "node scripts/generate-docs.mjs",
-    "content": "pnpm run gallery && pnpm run docs",
+    "news": "node scripts/generate-news.mjs",
+    "changelog": "node scripts/generate-changelog.mjs",
+    "content": "pnpm run gallery && pnpm run docs && pnpm run news && pnpm run changelog",
     "predev": "pnpm run content",
     "dev": "astro dev",
     "prebuild": "pnpm run content",

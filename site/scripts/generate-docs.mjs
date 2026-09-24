@@ -26,112 +26,112 @@ const baseDocuments = [
     summary: "Verbindliche Regeln für Ablage, Benennung und Pflege der Inhalte.",
   },
   {
-    source: "01_Tips/README.md",
+    source: "Nützliches/Tipps/README.md",
     slug: "tipps",
     title: "Tipps",
     section: "Informationen",
     summary: "Kurze Hinweise, Tricks und Entscheidungshilfen für den Spielalltag.",
   },
   {
-    source: "02_Anleitungen/README.md",
+    source: "Nützliches/Anleitungen/README.md",
     slug: "anleitungen",
     title: "Anleitungen",
     section: "Informationen",
     summary: "Schritt-für-Schritt-Erklärungen für wiederkehrende Abläufe.",
   },
   {
-    source: "08_Strategien/README.md",
+    source: "Nützliches/Strategien/README.md",
     slug: "strategien",
     title: "Strategien",
     section: "Informationen",
     summary: "Taktiken und abgestimmte Vorgehensweisen der Allianz.",
   },
   {
-    source: "09_Analysen/README.md",
+    source: "Nützliches/Analysen/README.md",
     slug: "analysen",
     title: "Analysen",
     section: "Informationen",
     summary: "Auswertungen, Vergleiche und nachvollziehbare Erkenntnisse.",
   },
   {
-    source: "07_Allianz/README.md",
+    source: "Nützliches/Allianz/README.md",
     slug: "allianz",
     title: "Allianz",
     section: "Informationen",
     summary: "Regeln, Rollen und wiederverwendbare Texte der DIE-Allianz.",
   },
   {
-    source: "06_Design-Guidelines/README.md",
+    source: "Styleguides/README.md",
     slug: "design-guidelines",
     title: "Design-Guidelines",
     section: "Gestaltung",
     summary: "Einstieg in die verbindliche Bildsprache und Textgestaltung.",
   },
   {
-    source: "06_Design-Guidelines/DlE-Stil – Chibi-Chatbilder.md",
+    source: "Styleguides/DlE-Stil – Chibi-Chatbilder.md",
     slug: "stil-chibi-chatbilder",
     title: "Stil: Chibi-Chatbilder",
     section: "Gestaltung",
     summary: "Format, Aufbau und Wiedererkennungsmerkmale der Chibi-Motive.",
   },
   {
-    source: "06_Design-Guidelines/DlE-Stil – Chat-Bilder.md",
+    source: "Styleguides/DlE-Stil – Chat-Bilder.md",
     slug: "stil-chatbilder",
     title: "Stil: Chatbilder",
     section: "Gestaltung",
     summary: "Gestaltungsregeln für normale Chatbilder der Allianz.",
   },
   {
-    source: "06_Design-Guidelines/DlE-Stil – Avatarbilder.md",
+    source: "Styleguides/DlE-Stil – Avatarbilder.md",
     slug: "stil-avatarbilder",
     title: "Stil: Avatarbilder",
     section: "Gestaltung",
     summary: "Vorgaben für konsistente Avatare und Porträts.",
   },
   {
-    source: "06_Design-Guidelines/DlE-Stil – Allianz-Mitteilungen.md",
+    source: "Styleguides/DlE-Stil – Allianz-Mitteilungen.md",
     slug: "stil-allianz-mitteilungen",
     title: "Stil: Allianz-Mitteilungen",
     section: "Gestaltung",
     summary: "Bildsprache und Aufbau offizieller Mitteilungen.",
   },
   {
-    source: "06_Design-Guidelines/DlE – Textformatierung.md",
+    source: "Styleguides/DlE – Textformatierung.md",
     slug: "textformatierung",
     title: "Textformatierung",
     section: "Gestaltung",
     summary: "Farben, Hierarchien und Formatierung für Texte im Spiel.",
   },
   {
-    source: "03_Avatare/README.md",
+    source: "Galerie/Avatare/README.md",
     slug: "avatare",
     title: "Avatare",
     section: "Bildarchiv",
     summary: "Ablage und Benennung der persönlichen Avatarbilder.",
   },
   {
-    source: "04_Charaktermodelle/README.md",
+    source: "Galerie/Charaktermodelle/README.md",
     slug: "charaktermodelle",
     title: "Charaktermodelle",
     section: "Bildarchiv",
     summary: "Referenzen für Figuren, Kleidung und wiederkehrende Merkmale.",
   },
   {
-    source: "05_Chatbilder/README.md",
+    source: "Galerie/Chatbilder/README.md",
     slug: "chatbilder",
     title: "Chatbilder",
     section: "Bildarchiv",
     summary: "Regeln und Struktur für die Sammlung der Chatmotive.",
   },
   {
-    source: "05_Chatbilder/Chibi/README.md",
+    source: "Galerie/Chatbilder/Chibi/README.md",
     slug: "chibi",
     title: "Chibi-Chatbilder",
     section: "Bildarchiv",
     summary: "Eigener Bereich für kompakte Motive im Chibi-Stil.",
   },
   {
-    source: "99_Archiv/README.md",
+    source: "Archiv/README.md",
     slug: "historisches-archiv",
     title: "Historisches Archiv",
     section: "Projekt",
@@ -156,7 +156,7 @@ const plainText = (value) => value
   .replace(/\s+/g, " ")
   .trim();
 
-const tipDirectory = path.join(repositoryDirectory, "01_Tips");
+const tipDirectory = path.join(repositoryDirectory, "Nützliches", "Tipps");
 const tipFileNames = (await readdir(tipDirectory, { withFileTypes: true }))
   .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith(".md") && entry.name.toLowerCase() !== "readme.md")
   .map((entry) => entry.name)
@@ -172,7 +172,7 @@ try {
 const tipDocuments = [];
 
 for (const fileName of tipFileNames) {
-  const source = `01_Tips/${fileName}`;
+  const source = `Nützliches/Tipps/${fileName}`;
   const sourcePath = path.join(tipDirectory, fileName);
   const markdown = await readFile(sourcePath, "utf8");
   const baseName = path.basename(fileName, path.extname(fileName));
@@ -182,7 +182,7 @@ for (const fileName of tipFileNames) {
   const summary = plainText(introduction.split(/\r?\n\s*\r?\n/)[0]) || "Praktischer Tipp für den Spielalltag.";
   const image = galleryItems.find((item) => {
     const itemBaseName = path.posix.basename(item.sourcePath, path.posix.extname(item.sourcePath));
-    return item.sourcePath.startsWith("01_Tips/") && itemBaseName === baseName;
+    return item.sourcePath.startsWith("Nützliches/Tipps/") && itemBaseName === baseName;
   });
 
   tipDocuments.push({

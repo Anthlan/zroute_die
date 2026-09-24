@@ -1,0 +1,62 @@
+---
+import "../../styles/global.css";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import newsData from "../../data/news.generated.json";
+
+export function getStaticPaths() {
+  return newsData.items.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const formatDate = (value) => new Intl.DateTimeFormat("de-DE", {
+  day: "2-digit",
+  month: "long",
+  year: "numeric",
+  timeZone: "Europe/Berlin",
+}).format(new Date(`${value}T12:00:00+02:00`));
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={article.summary} />
+    <link rel="icon" type="image/svg+xml" href="/zroute_die/favicon.svg" />
+    <title>{article.title} · DIE-Allianzarchiv</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <SiteHeader active="news" />
+
+      <main class="document-main news-detail-main" id="main-content">
+        <nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
+          <a href="/zroute_die/">Aktuelles</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{article.title}</span>
+        </nav>
+
+        <article class="document-article news-article">
+          <header>
+            <div class="news-card-meta">
+              <span>{article.category}</span>
+              <time datetime={article.date}>{formatDate(article.date)}</time>
+            </div>
+            <h1>{article.title}</h1>
+            <p>{article.summary}</p>
+            <a href={article.repositoryUrl} target="_blank" rel="noopener noreferrer">
+              Markdown auf GitHub öffnen <span aria-hidden="true">↗</span>
+            </a>
+          </header>
+          <div class="markdown-content" set:html={article.html} />
+        </article>
+      </main>
+
+      <SiteFooter />
+    </div>
+  </body>
+</html>

@@ -11,15 +11,15 @@ const dataFile = path.join(siteRoot, "src", "data", "gallery.generated.json");
 const imageExtensions = new Set([".png", ".jpg", ".jpeg", ".webp"]);
 
 const contentAreas = [
-  ["01_Tips", "Tipp"],
-  ["02_Anleitungen", "Anleitung"],
-  ["03_Avatare", "Avatar"],
-  ["04_Charaktermodelle", "Charaktermodell"],
-  ["05_Chatbilder", "Chatbild"],
-  ["06_Design-Guidelines", "Stilguide"],
-  ["07_Allianz", "Allianz"],
-  ["08_Strategien", "Strategie"],
-  ["09_Analysen", "Analyse"],
+  ["Nützliches/Tipps", "Tipp"],
+  ["Nützliches/Anleitungen", "Anleitung"],
+  ["Nützliches/Allianz", "Allianz"],
+  ["Nützliches/Strategien", "Strategie"],
+  ["Nützliches/Analysen", "Analyse"],
+  ["Galerie/Avatare", "Avatar"],
+  ["Galerie/Charaktermodelle", "Charaktermodell"],
+  ["Galerie/Chatbilder", "Chatbild"],
+  ["Styleguides", "Stilguide"],
 ];
 
 const knownPeople = [
@@ -96,7 +96,7 @@ function slugify(value) {
 
 function parseMetadata(sourcePath, defaultCategory) {
   const normalizedPath = sourcePath.split(path.sep).join("/");
-  const category = normalizedPath.startsWith("05_Chatbilder/Chibi/") ? "Chibi" : defaultCategory;
+  const category = normalizedPath.startsWith("Galerie/Chatbilder/Chibi/") ? "Chibi" : defaultCategory;
   const baseName = path.basename(sourcePath, path.extname(sourcePath));
   const tokens = baseName.split("_").filter(Boolean);
   const dateIndex = tokens.findIndex((token, index) =>

@@ -2,40 +2,12 @@
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-import docsData from "../data/docs.generated.json";
-import galleryData from "../data/gallery.generated.json";
+import newsData from "../data/news.generated.json";
+import changelog from "../data/changelog.generated.json";
 
-const galleryItems = galleryData.items;
-const categoryLabels = {
-  Chatbild: "Chatbilder",
-  Chibi: "Chibi",
-  Avatar: "Avatare",
-  Charaktermodell: "Charaktere",
-  Allianz: "Allianz",
-  Tipp: "Tipps",
-  Anleitung: "Anleitungen",
-  Stilguide: "Stilguide",
-  Strategie: "Strategien",
-  Analyse: "Analysen",
-};
-const categories = Object.entries(categoryLabels)
-  .map(([value, label]) => ({
-    value,
-    label,
-    count: galleryItems.filter((item) => item.category === value).length,
-  }))
-  .filter((category) => category.count > 0);
-const people = [...new Set(galleryItems.flatMap((item) => item.people))].sort((left, right) =>
-  left.localeCompare(right, "de"),
-);
-const dateFormatter = new Intl.DateTimeFormat("de-DE", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-  timeZone: "UTC",
-});
-
-const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00:00Z`)) : "Ohne Datum";
+const formatDate = (value) => value
+  ? new Intl.DateTimeFormat("de-DE", { day: "2-digit", month: "long", year: "numeric", timeZone: "Europe/Berlin" }).format(new Date(value))
+  : "Noch nicht veröffentlicht";
 ---
 
 <!doctype html>
@@ -45,113 +17,104 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Das öffentliche Archiv der DIE-Allianz mit Chatbildern, Charaktermodellen, Tipps und Strategien."
+      content="Neuigkeiten und die letzten Änderungen aus dem öffentlichen DIE-Allianzarchiv."
     />
     <link rel="icon" type="image/svg+xml" href="/zroute_die/favicon.svg" />
-    <title>DIE-Allianzarchiv</title>
+    <title>Aktuelles · DIE-Allianzarchiv</title>
   </head>
   <body>
     <div class="page-shell">
-      <SiteHeader active="gallery" />
+      <SiteHeader active="news" />
 
-      <main id="main-content">
-        <section class="archive-intro" aria-labelledby="archive-title">
+      <main class="news-main" id="main-content">
+        <section class="news-hero" aria-labelledby="news-title">
           <div>
-            <p class="eyebrow">Öffentliches DIE-Archiv</p>
-            <h1 id="archive-title">Bilder, Informationen und Geschichten der Allianz</h1>
+            <p class="eyebrow">DIE-Allianzarchiv</p>
+            <h1 id="news-title">Aktuelles</h1>
           </div>
-          <p class="intro-copy">
-            Durchsuche Chatbilder, Charakterreferenzen und Allianzmaterial. Die Originale bleiben mit ihrer
-            vollständigen Qualität und Historie im GitHub-Repository erhalten.
+          <p>
+            Gezielte Neuigkeiten aus der Allianz und ein transparenter Überblick über die zuletzt
+            veröffentlichten Änderungen.
           </p>
-          <dl class="archive-stats" aria-label="Archivumfang">
-            <div><dt>{galleryData.imageCount}</dt><dd>Bilder</dd></div>
-            <div><dt>{docsData.documentCount}</dt><dd>Dokumente</dd></div>
-            <div><dt>10</dt><dd>Bereiche</dd></div>
+          <dl class="archive-stats" aria-label="Umfang der Neuigkeiten">
+            <div><dt>{newsData.items.length}</dt><dd>Meldungen</dd></div>
           </dl>
         </section>
 
-        <section class="gallery-section" id="galerie" aria-labelledby="gallery-title">
-          <div class="section-heading">
+        <section class="news-section" aria-labelledby="news-list-title">
+          <header class="content-section-heading">
             <div>
-              <p class="eyebrow">Das vollständige Bildarchiv</p>
-              <h2 id="gallery-title">Galerie</h2>
+              <p class="eyebrow">Gezielt veröffentlicht</p>
+              <h2 id="news-list-title">Neuigkeiten</h2>
             </div>
-            <p class="gallery-hint">Bild auswählen, um die größere Ansicht und das Original zu öffnen.</p>
-          </div>
+            <p>Wichtige Meldungen, neue Inhalte und Hinweise aus dem Archiv.</p>
+          </header>
 
-          <div class="gallery-toolbar">
-            <div class="category-list" role="group" aria-label="Nach Kategorie filtern">
-              <button class="category-chip is-selected" type="button" data-category="all" aria-pressed="true">
-                Alle <span>{galleryItems.length}</span>
-              </button>
-              {categories.map((category) => (
-                <button class="category-chip" type="button" data-category={category.value} aria-pressed="false">
-                  {category.label} <span>{category.count}</span>
-                </button>
+          {newsData.items.length > 0 ? (
+            <div class="news-card-grid">
+              {newsData.items.map((item, index) => (
+                <a class:list={["news-card", { "is-featured": item.featured && index === 0 }]} href={item.url}>
+                  <div class="news-card-meta">
+                    <span>{item.category}</span>
+                    <time datetime={item.date}>{formatDate(`${item.date}T12:00:00+02:00`)}</time>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.summary}</p>
+                  <strong>Weiterlesen →</strong>
+                </a>
               ))}
             </div>
+          ) : (
+            <p class="news-empty">Noch sind keine Neuigkeiten veröffentlicht.</p>
+          )}
+        </section>
 
-            <div class="people-filter">
-              <label for="people-filter">Person</label>
-              <select id="people-filter">
-                <option value="all">Alle Personen</option>
-                {people.map((person) => <option value={person}>{person}</option>)}
-              </select>
+        <section class="changelog-section" aria-labelledby="changelog-title">
+          <header class="content-section-heading">
+            <div>
+              <p class="eyebrow">Automatisch aus Git</p>
+              <h2 id="changelog-title">Letztes Update</h2>
             </div>
+            <p>Dieser Bereich wird bei jeder Veröffentlichung aus dem neuesten Commit erzeugt.</p>
+          </header>
 
-            <p class="result-count" id="result-count" aria-live="polite">{galleryItems.length} Bilder</p>
-          </div>
-
-          <div class="gallery-grid" id="gallery-grid">
-            {galleryItems.map((item, index) => (
-              <article
-                class="gallery-card"
-                data-category={item.category}
-                data-people={item.people.join("|")}
-                data-title={item.title}
-                data-date={item.date ?? ""}
-                data-date-label={formatDate(item.date)}
-                data-web={item.webUrl}
-                data-original={item.repositoryUrl}
-              >
-                <button class="gallery-open" type="button" aria-label={`${item.title} öffnen`}>
-                  <div class="image-frame">
-                    <img
-                      src={item.thumbnailUrl}
-                      alt={item.title}
-                      loading={index < 8 ? "eager" : "lazy"}
-                      decoding="async"
-                    />
-                    <span class="category-badge">{item.category}</span>
-                  </div>
-                  <div class="card-copy">
-                    <div>
-                      <h3>{item.title}</h3>
-                      <p>{item.people.length ? item.people.join(" · ") : "DIE"}</p>
-                    </div>
-                    <time datetime={item.date ?? undefined}>{formatDate(item.date)}</time>
-                  </div>
-                </button>
-              </article>
-            ))}
-          </div>
-
-          <div class="gallery-empty" id="gallery-empty" hidden>
-            <strong>Keine passenden Bilder gefunden.</strong>
-            <span>Wähle eine andere Kategorie oder Person.</span>
+          <div class="changelog-card">
+            <div class="changelog-summary">
+              <time datetime={changelog.date ?? undefined}>{formatDate(changelog.date)}</time>
+              <h3>{changelog.title}</h3>
+            </div>
+            {changelog.available && changelog.groups.length > 0 ? (
+              <div class="changelog-groups">
+                {changelog.groups.map((group) => (
+                  <section>
+                    <h4>{group.name}</h4>
+                    <ul>
+                      {group.items.map((item) => <li>{item}</li>)}
+                    </ul>
+                  </section>
+                ))}
+              </div>
+            ) : (
+              <p class="changelog-empty">Für diesen Stand konnten keine sichtbaren Änderungen ermittelt werden.</p>
+            )}
           </div>
         </section>
 
-        <section class="next-sections" aria-label="Weitere Archivbereiche">
-          <a class="section-link" href="/zroute_die/docs/">
+        <section class="next-sections" aria-label="Archivbereiche">
+          <a class="section-link" href="/zroute_die/galerie/">
             <span>01</span>
+            <h2>Galerie</h2>
+            <p>Chatbilder, Avatare und Charakterreferenzen durchsuchen.</p>
+            <strong>Galerie öffnen →</strong>
+          </a>
+          <a class="section-link" href="/zroute_die/docs/">
+            <span>02</span>
             <h2>Nützliches</h2>
             <p>Tipps, Anleitungen, Strategien, Analysen und Allianzinformationen.</p>
             <strong>Bereich öffnen →</strong>
           </a>
           <a class="section-link" href="/zroute_die/docs/styleguides/">
-            <span>02</span>
+            <span>03</span>
             <h2>Styleguides</h2>
             <p>Verbindliche Bildsprache, Gestaltung und Textformatierung.</p>
             <strong>Bereich öffnen →</strong>
@@ -159,135 +122,7 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
         </section>
       </main>
 
-      <dialog class="gallery-dialog" id="gallery-dialog" aria-labelledby="detail-title">
-        <div class="dialog-layout">
-          <div class="dialog-stage">
-            <button class="dialog-close" type="button" data-dialog-close aria-label="Detailansicht schließen">×</button>
-            <img id="detail-image" alt="" />
-            <div class="dialog-navigation" aria-label="Zwischen Bildern wechseln">
-              <button type="button" id="detail-previous" aria-label="Vorheriges Bild">←</button>
-              <span id="detail-position"></span>
-              <button type="button" id="detail-next" aria-label="Nächstes Bild">→</button>
-            </div>
-          </div>
-          <aside class="dialog-details">
-            <p class="eyebrow" id="detail-category"></p>
-            <h2 id="detail-title"></h2>
-            <dl>
-              <div><dt>Personen</dt><dd id="detail-people"></dd></div>
-              <div><dt>Datum</dt><dd id="detail-date"></dd></div>
-            </dl>
-            <a class="detail-original" id="detail-original" href="#" target="_blank" rel="noopener noreferrer">
-              Original auf GitHub öffnen <span aria-hidden="true">↗</span>
-            </a>
-          </aside>
-        </div>
-      </dialog>
-
       <SiteFooter />
     </div>
-
-    <script>
-      const cards = [...document.querySelectorAll(".gallery-card")];
-      const categoryButtons = [...document.querySelectorAll(".category-chip[data-category]")];
-      const peopleFilter = document.querySelector("#people-filter");
-      const resultCount = document.querySelector("#result-count");
-      const emptyState = document.querySelector("#gallery-empty");
-      const dialog = document.querySelector("#gallery-dialog");
-      const detailImage = document.querySelector("#detail-image");
-      const detailTitle = document.querySelector("#detail-title");
-      const detailCategory = document.querySelector("#detail-category");
-      const detailPeople = document.querySelector("#detail-people");
-      const detailDate = document.querySelector("#detail-date");
-      const detailOriginal = document.querySelector("#detail-original");
-      const detailPosition = document.querySelector("#detail-position");
-      const previousButton = document.querySelector("#detail-previous");
-      const nextButton = document.querySelector("#detail-next");
-      let selectedCategory = "all";
-      let visibleCards = cards;
-      let currentIndex = 0;
-
-      function applyFilters() {
-        const selectedPerson = peopleFilter.value;
-        visibleCards = cards.filter((card) => {
-          const categoryMatches = selectedCategory === "all" || card.dataset.category === selectedCategory;
-          const people = (card.dataset.people ?? "").split("|").filter(Boolean);
-          const personMatches = selectedPerson === "all" || people.includes(selectedPerson);
-          const visible = categoryMatches && personMatches;
-          card.hidden = !visible;
-          return visible;
-        });
-
-        resultCount.textContent = `${visibleCards.length} ${visibleCards.length === 1 ? "Bild" : "Bilder"}`;
-        emptyState.hidden = visibleCards.length !== 0;
-      }
-
-      function showCard(card) {
-        currentIndex = visibleCards.indexOf(card);
-        detailImage.src = card.dataset.web;
-        detailImage.alt = card.dataset.title;
-        detailTitle.textContent = card.dataset.title;
-        detailCategory.textContent = card.dataset.category;
-        detailPeople.textContent = card.dataset.people ? card.dataset.people.split("|").join(" · ") : "DIE";
-        detailDate.textContent = card.dataset.dateLabel;
-        detailOriginal.href = card.dataset.original;
-        detailPosition.textContent = `${currentIndex + 1} / ${visibleCards.length}`;
-        previousButton.disabled = visibleCards.length < 2;
-        nextButton.disabled = visibleCards.length < 2;
-
-        if (!dialog.open) {
-          dialog.showModal();
-          document.documentElement.classList.add("dialog-open");
-        }
-      }
-
-      categoryButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          selectedCategory = button.dataset.category;
-          categoryButtons.forEach((item) => {
-            const selected = item === button;
-            item.classList.toggle("is-selected", selected);
-            item.setAttribute("aria-pressed", String(selected));
-          });
-          applyFilters();
-        });
-      });
-
-      peopleFilter.addEventListener("change", applyFilters);
-      cards.forEach((card) => card.querySelector(".gallery-open").addEventListener("click", () => showCard(card)));
-
-      previousButton.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length;
-        showCard(visibleCards[currentIndex]);
-      });
-
-      nextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % visibleCards.length;
-        showCard(visibleCards[currentIndex]);
-      });
-
-      document.querySelector("[data-dialog-close]").addEventListener("click", () => dialog.close());
-      dialog.addEventListener("click", (event) => {
-        if (event.target === dialog) dialog.close();
-      });
-      dialog.addEventListener("close", () => {
-        document.documentElement.classList.remove("dialog-open");
-        detailImage.removeAttribute("src");
-      });
-
-      dialog.addEventListener("keydown", (event) => {
-        if (visibleCards.length < 2) return;
-
-        if (event.key === "ArrowLeft") {
-          event.preventDefault();
-          previousButton.click();
-        }
-
-        if (event.key === "ArrowRight") {
-          event.preventDefault();
-          nextButton.click();
-        }
-      });
-    </script>
   </body>
 </html>

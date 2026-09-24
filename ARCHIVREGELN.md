@@ -3,17 +3,17 @@
 ## Projekt
 
 - **Spiel:** Z:Route: Redemption
-- **Allianz – verbindliche Ingame-Schreibweise:** DlE
+- **Allianz – Schreibweise auf dieser Website:** DIE
 - **Frühere Bezeichnungen:** DRR / Drachenritter
 - **Technischer Hinweis:** Die Schreibweise `DIE` wird vom Filter des Spiels blockiert. Deshalb muss innerhalb des Spiels `DlE` verwendet werden.
 - **Spielername:** Anthlan
 - **Zweck der Ablage:** Wiederverwendbare Texte, Bilder, Regeln, Anleitungen, Strategien und Auswertungen für das Spiel und die Allianz zentral sichern.
 
-Die Schreibweise **DlE** ist für alle spielbezogenen Inhalte verbindlich. **DIE** darf nur genannt werden, wenn die vom Filter blockierte Schreibweise erklärt wird. Die früheren Bezeichnungen **DRR** und **Drachenritter** werden nur verwendet, wenn ein historischer Stand dokumentiert wird.
+Auf dieser Website und im Repository wird die Allianz durchgängig als **DIE** bezeichnet. Im Spiel kann aus technischen Filtergründen eine abweichende Schreibweise erforderlich sein. Die früheren Bezeichnungen **DRR** und **Drachenritter** werden nur verwendet, wenn ein historischer Stand dokumentiert wird.
 
 ## Inhaltlicher Rahmen
 
-- Inhalte beziehen sich ausschließlich auf **Z:Route: Redemption**, die Allianz **DlE** und den zugehörigen Spielkontext.
+- Inhalte beziehen sich ausschließlich auf **Z:Route: Redemption**, die Allianz **DIE** und den zugehörigen Spielkontext.
 - Persönliche oder berufliche Informationen gehören nicht in Allianztexte, Grafiken oder Charakterbeschreibungen.
 - Pandora-Inhalte werden getrennt von allgemeinen Tipps behandelt.
 - Nicht bestätigte Spielmechaniken werden deutlich als **unbestätigt**, **zu testen** oder **Community-Hinweis** gekennzeichnet.
@@ -21,22 +21,18 @@ Die Schreibweise **DlE** ist für alle spielbezogenen Inhalte verbindlich. **DIE
 
 ## Ordnerstruktur
 
-- `01_Tips`: kurze, direkt teilbare Allianz-Tipps mit Text und Grafik
-- `02_Anleitungen`: ausführlichere Schritt-für-Schritt-Anleitungen
-- `03_Avatare`: fertige Profil- und Avatarbilder
-- `04_Charaktermodelle`: Charakterreferenzen, Modelle, Details und charakterbezogene Szenen
-- `05_Chatbilder`: allgemeine Bilder für Chatnachrichten und humorvolle Szenen; Chibi-Reaktionsbilder werden im Unterordner `Chibi` abgelegt
-- `06_Design-Guidelines`: verbindliche Regeln für Gestaltung und Textformatierung
-- `07_Allianz`: Regeln, Rollen, Kommunikationsstrategie und wiederverwendbare Allianztexte
-- `08_Strategien`: taktische Planungen und Kampfkonzepte
-- `09_Analysen`: Event-, Kampf-, Account- und Serverauswertungen
-- `99_Archiv`: ersetzte, veraltete oder nur noch historisch relevante Fassungen
+- `Aktuelles`: manuell gepflegte Neuigkeiten für die Startseite
+- `Galerie`: Avatare, Charaktermodelle und Chatbilder
+- `Nützliches`: Tipps, Anleitungen, Strategien, Analysen und Allianzmaterial
+- `Styleguides`: verbindliche Regeln für Gestaltung und Textformatierung
+- `Archiv`: ersetzte, veraltete oder nur noch historisch relevante Fassungen
+- `site`: technische Quellen und Build-Skripte der Website
 
 ## Ablageregeln
 
 1. Die Ablage bleibt möglichst flach. Für einzelne Tipps, Anleitungen oder Bilder werden keine zusätzlichen Unterordner erstellt.
 2. Zusammengehöriger Text und zugehörige Grafik erhalten exakt denselben Basisnamen.
-3. Veraltete Fassungen werden nach `99_Archiv` verschoben. Dateinamen wie `final`, `final2` oder `neu_neu` werden vermieden.
+3. Veraltete Fassungen werden nach `Archiv` verschoben. Dateinamen wie `final`, `final2` oder `neu_neu` werden vermieden.
 4. Dateinamen sollen den Inhalt ohne Öffnen der Datei erkennen lassen.
 5. Groß- und Kleinschreibung von Spielernamen wird aus dem Spiel beziehungsweise aus dem dargestellten Bild übernommen.
 6. Strukturänderungen und neue verbindliche Regeln werden über aussagekräftige Git-Commits nachvollziehbar dokumentiert.
@@ -134,7 +130,7 @@ YYYY_MM_DD_HHMM_Kurztitel_[Hauptfiguren].Dateiendung
 
 Hier steht der Zeitstempel zuerst, weil die chronologische Einordnung wichtiger ist als die Gruppierung nach einem einzelnen Charakter. Die Hauptfiguren werden nur ergänzt, wenn sie eindeutig zuzuordnen sind; mehrere Namen werden jeweils mit einem Unterstrich getrennt. Der Kurztitel und die Hauptfiguren enthalten keine Leerzeichen.
 
-Chibi-Chatbilder verwenden dasselbe Schema und liegen im Unterordner `05_Chatbilder/Chibi`.
+Chibi-Chatbilder verwenden dasselbe Schema und liegen im Unterordner `Galerie/Chatbilder/Chibi`.
 
 Beispiele:
 
@@ -146,5 +142,5 @@ Beispiele:
 ## Umgang mit historischen Inhalten
 
 - Inhalte mit DRR, alten Rollen oder überholten Regeln werden nicht stillschweigend überschrieben.
-- Wenn sie weiterhin dokumentationswürdig sind, werden sie eindeutig gekennzeichnet und nach `99_Archiv` verschoben.
-- Die aktuelle Fassung verwendet immer **DlE** und den zuletzt bestätigten Rollen- und Regelstand.
+- Wenn sie weiterhin dokumentationswürdig sind, werden sie eindeutig gekennzeichnet und nach `Archiv` verschoben.
+- Die aktuelle Fassung verwendet immer **DIE** und den zuletzt bestätigten Rollen- und Regelstand.
