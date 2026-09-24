@@ -651,7 +651,7 @@ h1 {
 
 .next-sections {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   margin-top: 28px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -730,58 +730,32 @@ h1 {
   grid-row: 1 / span 2;
 }
 
-.docs-jump-nav {
-  justify-content: center;
-  gap: 8px;
-  padding: 15px;
-  border: 1px solid var(--line);
-  background: rgba(10, 15, 34, 0.72);
+.docs-library {
+  border-top: 1px solid var(--line);
 }
 
-.docs-jump-nav a {
-  padding: 8px 13px;
-  border: 1px solid transparent;
-  border-radius: 999px;
+.docs-collection {
+  padding-top: 28px;
 }
 
-.docs-jump-nav a:hover,
-.docs-jump-nav a:focus-visible {
-  border-color: var(--line-bright);
-  color: var(--gold-pale);
-  background: rgba(227, 173, 78, 0.08);
-}
-
-.docs-sections {
-  display: grid;
-  gap: 58px;
-  padding-top: 58px;
-}
-
-.docs-section {
-  scroll-margin-top: 24px;
-}
-
-.docs-section > header {
+.docs-library > header {
   display: grid;
   grid-template-columns: minmax(220px, 0.45fr) minmax(0, 1fr);
   column-gap: 36px;
-  margin-bottom: 20px;
+  align-items: end;
+  padding: 28px 0 22px;
 }
 
-.docs-section > header .eyebrow {
-  grid-column: 1;
+.docs-library > header .eyebrow {
+  margin-bottom: 8px;
 }
 
-.docs-section > header h2 {
-  grid-column: 1;
+.docs-library > header h2 {
   margin: 0;
   font: 500 30px/1.1 Georgia, serif;
 }
 
-.docs-section > header > p:last-child {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  align-self: end;
+.docs-library > header > p {
   margin: 0;
   color: var(--muted);
   line-height: 1.6;
@@ -1521,28 +1495,19 @@ footer a {
   }
 
   .docs-intro,
-  .docs-section > header,
+  .docs-library > header,
   .document-layout {
     grid-template-columns: 1fr;
   }
 
   .docs-intro > p:not(.eyebrow),
-  .docs-section > header > p:last-child {
+  .docs-library > header > p {
     grid-column: 1;
     grid-row: auto;
   }
 
   .docs-intro .archive-stats {
     grid-column: 1;
-  }
-
-  .docs-jump-nav {
-    justify-content: start;
-    overflow-x: auto;
-  }
-
-  .docs-jump-nav a {
-    flex: 0 0 auto;
   }
 
   .docs-card-grid {

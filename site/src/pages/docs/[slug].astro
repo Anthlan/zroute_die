@@ -22,9 +22,11 @@ const sectionDocuments = topLevelSectionDocuments.flatMap((item) =>
 );
 const activeSection = document.section === "Gestaltung"
   ? "gestaltung"
-  : document.section === "Allianz"
-    ? "allianz"
-    : "wissen";
+  : document.section === "Informationen"
+    ? "informationen"
+    : "";
+const overviewUrl = document.section === "Gestaltung" ? "/zroute_die/docs/styleguides/" : "/zroute_die/docs/";
+const overviewLabel = document.section === "Gestaltung" ? "Styleguides" : "Nützliches";
 ---
 
 <!doctype html>
@@ -44,7 +46,7 @@ const activeSection = document.section === "Gestaltung"
         <nav class="breadcrumbs" aria-label="Brotkrümelnavigation">
           <a href="/zroute_die/">Start</a>
           <span aria-hidden="true">/</span>
-          <a href="/zroute_die/docs/">Dokumentation</a>
+          <a href={overviewUrl}>{overviewLabel}</a>
           <span aria-hidden="true">/</span>
           <span aria-current="page">{document.title}</span>
         </nav>
@@ -52,7 +54,7 @@ const activeSection = document.section === "Gestaltung"
         <div class:list={["document-layout", { "is-knowledge-page": document.imageUrl }]}>
           <aside class="document-sidebar">
             <p class="eyebrow">{document.section}</p>
-            <a class="docs-overview-link" href="/zroute_die/docs/">← Alle Dokumente</a>
+            <a class="docs-overview-link" href={overviewUrl}>← {overviewLabel}</a>
             {sectionDocuments.length > 0 && (
               <nav class="document-section-nav" aria-label={`Weitere Dokumente aus ${document.section}`}>
                 <span>In diesem Bereich</span>
@@ -100,17 +102,17 @@ const activeSection = document.section === "Gestaltung"
             {childDocuments.length > 0 && !document.parentSlug && (
               <section class="knowledge-children" aria-labelledby="knowledge-children-title">
                 <div>
-                  <p class="eyebrow">Wissensseiten</p>
+                  <p class="eyebrow">Informationsseiten</p>
                   <h2 id="knowledge-children-title">Verfügbare Tipps</h2>
                 </div>
                 <div class="knowledge-card-list">
                   {childDocuments.map((item) => (
                     <a class="knowledge-card" href={item.url}>
                       <div>
-                        <span>Wissen · Tipp</span>
+                        <span>Informationen · Tipp</span>
                         <h3>{item.title}</h3>
                         <p>{item.summary}</p>
-                        <strong>Wissensseite öffnen →</strong>
+                        <strong>Informationsseite öffnen →</strong>
                       </div>
                       {item.imageUrl && <img src={item.imageUrl} alt="" loading="lazy" />}
                     </a>

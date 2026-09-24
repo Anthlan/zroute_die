@@ -1,0 +1,60 @@
+---
+import "../../styles/global.css";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import docsData from "../../data/docs.generated.json";
+
+const itemBySlug = new Map(docsData.items.map((item) => [item.slug, item]));
+const styleSection = docsData.sections.find((section) => section.name === "Gestaltung");
+const styleDocuments = styleSection
+  ? styleSection.items.map((slug) => itemBySlug.get(slug)).filter(Boolean)
+  : [];
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Styleguides für Bildsprache, Gestaltung und Textformatierung des DIE-Allianzarchivs."
+    />
+    <link rel="icon" type="image/svg+xml" href="/zroute_die/favicon.svg" />
+    <title>Styleguides · DIE-Allianzarchiv</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <SiteHeader active="gestaltung" />
+
+      <main class="docs-main" id="main-content">
+        <section class="docs-intro" aria-labelledby="styleguides-title">
+          <p class="eyebrow">Gestaltung</p>
+          <h1 id="styleguides-title">Styleguides</h1>
+          <p>
+            Verbindliche Vorgaben für Bildsprache, Chatmotive, Avatare, Allianz-Mitteilungen und
+            Textformatierung.
+          </p>
+          <dl class="archive-stats" aria-label="Umfang der Styleguides">
+            <div><dt>{styleDocuments.length}</dt><dd>Guides</dd></div>
+          </dl>
+        </section>
+
+        <section class="docs-library docs-collection" aria-label="Styleguides">
+          <div class="docs-card-grid">
+            {styleDocuments.map((item) => (
+              <a class="docs-card" href={item.url}>
+                <span>Styleguide</span>
+                <h3>{item.title}</h3>
+                <p>{item.summary}</p>
+                <strong>Lesen →</strong>
+              </a>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <SiteFooter />
+    </div>
+  </body>
+</html>

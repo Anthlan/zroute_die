@@ -29,35 +29,35 @@ const baseDocuments = [
     source: "01_Tips/README.md",
     slug: "tipps",
     title: "Tipps",
-    section: "Wissen",
+    section: "Informationen",
     summary: "Kurze Hinweise, Tricks und Entscheidungshilfen für den Spielalltag.",
   },
   {
     source: "02_Anleitungen/README.md",
     slug: "anleitungen",
     title: "Anleitungen",
-    section: "Wissen",
+    section: "Informationen",
     summary: "Schritt-für-Schritt-Erklärungen für wiederkehrende Abläufe.",
   },
   {
     source: "08_Strategien/README.md",
     slug: "strategien",
     title: "Strategien",
-    section: "Wissen",
+    section: "Informationen",
     summary: "Taktiken und abgestimmte Vorgehensweisen der Allianz.",
   },
   {
     source: "09_Analysen/README.md",
     slug: "analysen",
     title: "Analysen",
-    section: "Wissen",
+    section: "Informationen",
     summary: "Auswertungen, Vergleiche und nachvollziehbare Erkenntnisse.",
   },
   {
     source: "07_Allianz/README.md",
     slug: "allianz",
     title: "Allianz",
-    section: "Allianz",
+    section: "Informationen",
     summary: "Regeln, Rollen und wiederverwendbare Texte der DIE-Allianz.",
   },
   {
@@ -189,7 +189,7 @@ for (const fileName of tipFileNames) {
     source,
     slug: slugify(baseName),
     title,
-    section: "Wissen",
+    section: "Informationen",
     summary,
     parentSlug: "tipps",
     kind: "tip",
@@ -202,8 +202,7 @@ const documents = [...baseDocuments, ...tipDocuments];
 
 const sectionDescriptions = {
   Projekt: "Orientierung, Regeln und Hintergrund zum Archiv.",
-  Wissen: "Tipps, Anleitungen, Strategien und Analysen.",
-  Allianz: "Gemeinsame Grundlagen, Rollen und Vorlagen.",
+  Informationen: "Tipps, Anleitungen, Strategien, Analysen und Allianzinformationen.",
   Gestaltung: "Verbindliche Regeln für Bilder und Texte.",
   Bildarchiv: "Struktur und Pflege der visuellen Inhalte.",
 };
@@ -272,7 +271,7 @@ for (const document of documents) {
   });
 }
 
-const sectionOrder = ["Projekt", "Wissen", "Allianz", "Gestaltung", "Bildarchiv"];
+const sectionOrder = ["Projekt", "Informationen", "Gestaltung", "Bildarchiv"];
 const sections = sectionOrder.map((name) => ({
   name,
   description: sectionDescriptions[name],

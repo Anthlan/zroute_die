@@ -5,13 +5,10 @@ import SiteHeader from "../../components/SiteHeader.astro";
 import docsData from "../../data/docs.generated.json";
 
 const itemBySlug = new Map(docsData.items.map((item) => [item.slug, item]));
-const sectionIds = {
-  Projekt: "projekt",
-  Wissen: "wissen",
-  Allianz: "allianz",
-  Gestaltung: "gestaltung",
-  Bildarchiv: "bildarchiv",
-};
+const informationSection = docsData.sections.find((section) => section.name === "Informationen");
+const usefulDocuments = informationSection
+  ? informationSection.items.map((slug) => itemBySlug.get(slug)).filter(Boolean)
+  : [];
 ---
 
 <!doctype html>
@@ -21,59 +18,40 @@ const sectionIds = {
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Dokumentation, Regeln, Wissen und Gestaltungsvorgaben des DIE-Allianzarchivs."
+      content="Tipps, Anleitungen, Strategien, Analysen und Allianzinformationen des DIE-Allianzarchivs."
     />
     <link rel="icon" type="image/svg+xml" href="/zroute_die/favicon.svg" />
-    <title>Dokumentation · DIE-Allianzarchiv</title>
+    <title>Nützliches · DIE-Allianzarchiv</title>
   </head>
   <body>
     <div class="page-shell">
-      <SiteHeader active="wissen" />
+      <SiteHeader active="informationen" />
 
       <main class="docs-main" id="main-content">
         <section class="docs-intro" aria-labelledby="docs-title">
-          <p class="eyebrow">Wissen aus dem Repository</p>
-          <h1 id="docs-title">Dokumentation</h1>
+          <p class="eyebrow">Informationen</p>
+          <h1 id="docs-title">Nützliches</h1>
           <p>
-            Regeln, Anleitungen und Gestaltungsvorgaben werden direkt aus den Markdown-Dateien des Projekts erzeugt.
-            Änderungen im Repository erscheinen beim nächsten Build automatisch hier.
+            Tipps, Anleitungen, Strategien, Analysen und Informationen zur Allianz – direkt aus den
+            Markdown-Dateien des Repositorys erzeugt.
           </p>
-          <dl class="archive-stats" aria-label="Dokumentationsumfang">
-            <div><dt>{docsData.documentCount}</dt><dd>Dokumente</dd></div>
-            <div><dt>{docsData.sections.length}</dt><dd>Bereiche</dd></div>
+          <dl class="archive-stats" aria-label="Umfang der nützlichen Inhalte">
+            <div><dt>{usefulDocuments.length}</dt><dd>Themen</dd></div>
           </dl>
         </section>
 
-        <nav class="docs-jump-nav" aria-label="Dokumentationsbereiche">
-          {docsData.sections.map((section) => (
-            <a href={`#${sectionIds[section.name]}`}>{section.name}</a>
-          ))}
-        </nav>
-
-        <div class="docs-sections">
-          {docsData.sections.map((section) => (
-            <section class="docs-section" id={sectionIds[section.name]} aria-labelledby={`${sectionIds[section.name]}-title`}>
-              <header>
-                <p class="eyebrow">Bereich</p>
-                <h2 id={`${sectionIds[section.name]}-title`}>{section.name}</h2>
-                <p>{section.description}</p>
-              </header>
-              <div class="docs-card-grid">
-                {section.items.map((slug) => {
-                  const item = itemBySlug.get(slug);
-                  return (
-                    <a class="docs-card" href={item.url}>
-                      <span>{item.section}</span>
-                      <h3>{item.title}</h3>
-                      <p>{item.summary}</p>
-                      <strong>Lesen →</strong>
-                    </a>
-                  );
-                })}
-              </div>
-            </section>
-          ))}
-        </div>
+        <section class="docs-library docs-collection" aria-label="Nützliche Inhalte">
+          <div class="docs-card-grid">
+            {usefulDocuments.map((item) => (
+              <a class="docs-card" href={item.url}>
+                <span>{item.section}</span>
+                <h3>{item.title}</h3>
+                <p>{item.summary}</p>
+                <strong>Lesen →</strong>
+              </a>
+            ))}
+          </div>
+        </section>
       </main>
 
       <SiteFooter />

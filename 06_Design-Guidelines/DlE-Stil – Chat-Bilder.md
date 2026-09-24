@@ -9,6 +9,24 @@ Normale Chatbilder verwenden den ausgereiften DlE-Allianzstil: eine hochwertige,
 
 Humorvolle Überspitzungen im Chibi-Stil werden als eigenes Format behandelt und folgen der separaten Guideline `DlE-Stil – Chibi-Chatbilder.md`.
 
+## Stilgruppen
+
+Alle Chatbilder bleiben Teil derselben blau-goldenen DlE-Bildwelt. Für die praktische Einordnung werden nur drei grobe Stilgruppen verwendet:
+
+### S1 – Filmische Allianz-Fantasy
+
+Der Standard für zusammenhängende Szenen. Figuren, Umgebung und Handlung bilden eine glaubwürdige filmische Momentaufnahme. Kurze Sprechblasen, Schilder oder organisch eingebettete Texte sind möglich, solange die Szene das Bild bestimmt.
+
+### S2 – Fantasy-Comic & Infografik
+
+Für Motive, bei denen Erklärungen, Running Gags oder Spielmechaniken mehr Raum benötigen. Mehrere Panels, deutliche Sprechblasen, Checklisten, UI-Elemente und plakative Überschriften sind erlaubt. Charaktermodelle, Farbwelt, Materialien und Licht bleiben dennoch an den normalen DlE-Stil gebunden; sterile Standard-Infografiken und rohe Screenshots ohne gestalterische Einbindung sind zu vermeiden.
+
+### S3 – Chibi-Reaktion
+
+Für kurze, stark überzeichnete Reaktionen mit vereinfachten Proportionen. Diese Bilder liegen im Unterordner `05_Chatbilder/Chibi` und folgen zusätzlich der separaten Chibi-Guideline.
+
+Die Stilgruppe wird im `05_Chatbilder/STILINDEX.md` dokumentiert und nicht in Dateiname oder Ordnerstruktur kodiert. Neue Gruppen werden nur eingeführt, wenn ein Bild keiner bestehenden Gruppe sinnvoll zugeordnet werden kann.
+
 ### Optik
 - Hochwertige **cinematische, halb-realistische Fantasyillustration** im Stil edler Game-Art
 - Filmische Komposition mit räumlicher Tiefe, glaubwürdigen Materialien und klarer Lichtführung
