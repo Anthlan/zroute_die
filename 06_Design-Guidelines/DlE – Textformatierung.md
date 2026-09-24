@@ -130,7 +130,6 @@ Zu viele Farben machen kurze Texte unruhig. Pro Nachricht reichen meistens zwei 
 Beispiel:
 
 ```text
-07_Ueberfall.md
-07_Ueberfall.png
+Ueberfall.md
+Ueberfall.png
 ```
-

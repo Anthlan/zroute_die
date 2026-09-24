@@ -1,4 +1,4 @@
-# Allgemeine Informationen und Rahmenparameter
+# Archivregeln und Rahmenparameter
 
 ## Projekt
 
@@ -21,7 +21,6 @@ Die Schreibweise **DlE** ist für alle spielbezogenen Inhalte verbindlich. **DIE
 
 ## Ordnerstruktur
 
-- `00_Einstieg`: Einstieg, Projektregeln und Änderungsübersicht
 - `01_Tips`: kurze, direkt teilbare Allianz-Tipps mit Text und Grafik
 - `02_Anleitungen`: ausführlichere Schritt-für-Schritt-Anleitungen
 - `03_Avatare`: fertige Profil- und Avatarbilder
@@ -40,31 +39,34 @@ Die Schreibweise **DlE** ist für alle spielbezogenen Inhalte verbindlich. **DIE
 3. Veraltete Fassungen werden nach `99_Archiv` verschoben. Dateinamen wie `final`, `final2` oder `neu_neu` werden vermieden.
 4. Dateinamen sollen den Inhalt ohne Öffnen der Datei erkennen lassen.
 5. Groß- und Kleinschreibung von Spielernamen wird aus dem Spiel beziehungsweise aus dem dargestellten Bild übernommen.
-6. Strukturänderungen und neue verbindliche Regeln werden im Changelog dokumentiert.
+6. Strukturänderungen und neue verbindliche Regeln werden über aussagekräftige Git-Commits nachvollziehbar dokumentiert.
 
 ## Dateinamensregeln
 
 ### Tipps und Anleitungen
 
-Schema:
+Tipps verwenden einen kurzen, beschreibenden Namen ohne laufende Nummer:
 
 ```text
-Nummer_Kurztitel.Dateiendung
+Kurztitel.Dateiendung
 ```
 
 Text und Bild verwenden denselben Basisnamen:
 
 ```text
-07_Ueberfall.md
-07_Ueberfall.png
+Ueberfall.md
+Ueberfall.png
 ```
 
-Falls der Text direkt als formatiertes HTML gespeichert wird:
+Für Anleitungen wird vorläufig das Thema vorangestellt:
 
 ```text
-07_Ueberfall.html
-07_Ueberfall.png
+Thema_Kurztitel.Dateiendung
+AllianzShop_SchrittFuerSchritt.md
+AllianzShop_SchrittFuerSchritt.png
 ```
+
+Falls ein Text als formatiertes HTML gespeichert wird, bleibt der Basisname ebenfalls unverändert. Die Regeln für noch leere Bereiche werden mit den ersten tatsächlichen Inhalten bei Bedarf präzisiert.
 
 ### Avatare
 
