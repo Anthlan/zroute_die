@@ -51,6 +51,7 @@ const verbFor = (status) => {
 const classify = (filePath) => {
   if (/^(Archiv|99_Archiv)\//.test(filePath) || filePath.startsWith("tmp/")) return null;
   if (/^(Aktuelles|00_Neuigkeiten)\//.test(filePath)) return { key: "news", name: "Neuigkeiten" };
+  if (filePath.startsWith("Termine/")) return { key: "events", name: "Termine" };
   if (filePath.startsWith("Nützliches/") || /^(01_Tips|02_Anleitungen|07_Allianz|08_Strategien|09_Analysen)\//.test(filePath)) {
     return { key: "information", name: "Informationen" };
   }
@@ -112,7 +113,7 @@ try {
     }
   }
 
-  const groupOrder = ["news", "information", "gallery", "style", "website", "deployment", "project"];
+  const groupOrder = ["news", "events", "information", "gallery", "style", "website", "deployment", "project"];
   result.available = true;
   result.title = title || "Website aktualisiert";
   result.date = date;

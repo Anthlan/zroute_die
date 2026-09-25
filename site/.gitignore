@@ -6,4 +6,5 @@ public/previews/
 src/data/gallery.generated.json
 src/data/docs.generated.json
 src/data/news.generated.json
+src/data/events.generated.json
 src/data/changelog.generated.json

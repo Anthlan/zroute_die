@@ -1,0 +1,52 @@
+---
+const { event, compact = false, relativeLabel = null } = Astro.props;
+
+const date = new Date(`${event.date}T12:00:00`);
+const day = new Intl.DateTimeFormat("de-DE", { day: "2-digit" }).format(date);
+const month = new Intl.DateTimeFormat("de-DE", { month: "short" }).format(date).replace(".", "");
+const year = new Intl.DateTimeFormat("de-DE", { year: "numeric" }).format(date);
+const longDate = new Intl.DateTimeFormat("de-DE", {
+  weekday: "long",
+  day: "2-digit",
+  month: "long",
+  year: "numeric",
+}).format(date);
+
+const timeLabel = event.time
+  ? `${event.time}${event.end ? `–${event.end}` : ""} Uhr`
+  : "Ganztägig";
+---
+
+<article id={`event-${event.slug}`} class:list={["event-card", { "is-compact": compact }]}>
+  <div class="event-date" aria-hidden="true">
+    {relativeLabel && <span>{relativeLabel}</span>}
+    <strong>{day}</strong>
+    <span>{month}</span>
+    <small>{year}</small>
+  </div>
+
+  <div class="event-content">
+    <div class="event-meta">
+      <span>{event.category}</span>
+      <time datetime={`${event.date}${event.time ? `T${event.time}` : ""}`}>{longDate} · {timeLabel}</time>
+    </div>
+    <h3>{event.title}</h3>
+    {event.location && <p class="event-location">Ort: {event.location}</p>}
+    {compact ? (
+      <p>{event.summary}</p>
+    ) : (
+      <div class="event-description markdown-content" set:html={event.html} />
+    )}
+  </div>
+
+  <div class="event-actions">
+    <a class="event-calendar-link" href={event.calendarUrl} download>
+      Zum Kalender <span aria-hidden="true">↓</span>
+    </a>
+    {!compact && (
+      <a class="event-source-link" href={event.repositoryUrl}>
+        Markdown auf GitHub <span aria-hidden="true">↗</span>
+      </a>
+    )}
+  </div>
+</article>

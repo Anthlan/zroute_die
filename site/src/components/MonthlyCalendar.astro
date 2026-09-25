@@ -1,0 +1,128 @@
+---
+const { events } = Astro.props;
+const calendarEvents = events.map((event) => ({
+  slug: event.slug,
+  title: event.title,
+  date: event.date,
+  time: event.time,
+  category: event.category,
+}));
+---
+
+<section class="month-calendar" aria-labelledby="month-calendar-title" data-events={JSON.stringify(calendarEvents)}>
+  <header class="calendar-toolbar">
+    <div>
+      <p class="eyebrow">Monatsübersicht</p>
+      <h2 id="month-calendar-title" data-calendar-title aria-live="polite">Kalender</h2>
+    </div>
+    <div class="calendar-controls" aria-label="Monat auswählen">
+      <button type="button" data-calendar-previous aria-label="Vorheriger Monat">←</button>
+      <button type="button" data-calendar-today>Heute</button>
+      <button type="button" data-calendar-next aria-label="Nächster Monat">→</button>
+    </div>
+  </header>
+
+  <div class="calendar-weekdays" aria-hidden="true">
+    <span>Mo</span>
+    <span>Di</span>
+    <span>Mi</span>
+    <span>Do</span>
+    <span>Fr</span>
+    <span>Sa</span>
+    <span>So</span>
+  </div>
+  <div class="calendar-grid" data-calendar-grid role="grid" aria-label="Terminkalender"></div>
+  <p class="calendar-hint">Ein Termin im Kalender führt direkt zu seinen vollständigen Informationen.</p>
+</section>
+
+<script>
+  const calendar = document.querySelector(".month-calendar");
+
+  if (calendar instanceof HTMLElement) {
+    const title = calendar.querySelector("[data-calendar-title]");
+    const grid = calendar.querySelector("[data-calendar-grid]");
+    const previousButton = calendar.querySelector("[data-calendar-previous]");
+    const todayButton = calendar.querySelector("[data-calendar-today]");
+    const nextButton = calendar.querySelector("[data-calendar-next]");
+    const events = JSON.parse(calendar.dataset.events ?? "[]");
+    const now = new Date();
+    let visibleMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    const pad = (value) => String(value).padStart(2, "0");
+    const dateKey = (date) => `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+    const todayKey = dateKey(now);
+
+    const renderCalendar = () => {
+      if (!(title instanceof HTMLElement) || !(grid instanceof HTMLElement)) return;
+
+      const year = visibleMonth.getFullYear();
+      const month = visibleMonth.getMonth();
+      const firstDayOffset = (new Date(year, month, 1).getDay() + 6) % 7;
+      const gridStart = new Date(year, month, 1 - firstDayOffset);
+      const monthLabel = new Intl.DateTimeFormat("de-DE", { month: "long", year: "numeric" }).format(visibleMonth);
+      title.textContent = monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1);
+      grid.replaceChildren();
+
+      for (let index = 0; index < 42; index += 1) {
+        const date = new Date(gridStart);
+        date.setDate(gridStart.getDate() + index);
+        const key = dateKey(date);
+        const dayEvents = events.filter((event) => event.date === key);
+        const day = document.createElement("div");
+        day.className = "calendar-day";
+        day.setAttribute("role", "gridcell");
+        day.dataset.date = key;
+
+        if (date.getMonth() !== month) day.classList.add("is-outside");
+        if (key === todayKey) day.classList.add("is-today");
+        if (dayEvents.length) day.classList.add("has-events");
+
+        const dayNumber = document.createElement("span");
+        dayNumber.className = "calendar-day-number";
+        dayNumber.textContent = String(date.getDate());
+        if (key === todayKey) dayNumber.setAttribute("aria-label", `Heute, ${date.getDate()}.`);
+        day.append(dayNumber);
+
+        const eventList = document.createElement("div");
+        eventList.className = "calendar-day-events";
+        for (const event of dayEvents) {
+          const link = document.createElement("a");
+          link.className = "calendar-event";
+          link.href = `#event-${event.slug}`;
+          link.setAttribute("aria-label", `${event.title}${event.time ? ` um ${event.time} Uhr` : ""}`);
+          link.title = event.title;
+
+          const dot = document.createElement("span");
+          dot.className = "calendar-event-dot";
+          dot.setAttribute("aria-hidden", "true");
+          link.append(dot);
+
+          const eventTitle = document.createElement("span");
+          eventTitle.className = "calendar-event-title";
+          eventTitle.textContent = `${event.time ? `${event.time} · ` : ""}${event.title}`;
+          link.append(eventTitle);
+          eventList.append(link);
+        }
+        day.append(eventList);
+        grid.append(day);
+      }
+    };
+
+    previousButton?.addEventListener("click", () => {
+      visibleMonth = new Date(visibleMonth.getFullYear(), visibleMonth.getMonth() - 1, 1);
+      renderCalendar();
+    });
+
+    nextButton?.addEventListener("click", () => {
+      visibleMonth = new Date(visibleMonth.getFullYear(), visibleMonth.getMonth() + 1, 1);
+      renderCalendar();
+    });
+
+    todayButton?.addEventListener("click", () => {
+      visibleMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      renderCalendar();
+    });
+
+    renderCalendar();
+  }
+</script>

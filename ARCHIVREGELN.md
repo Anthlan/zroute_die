@@ -22,6 +22,7 @@ Auf dieser Website und im Repository wird die Allianz durchgängig als **DIE** b
 ## Ordnerstruktur
 
 - `Aktuelles`: manuell gepflegte Neuigkeiten für die Startseite
+- `Termine`: Allianz-Events mit Datum, Uhrzeit und optionalem Kalender-Download
 - `Galerie`: Avatare, Charaktermodelle und Chatbilder
 - `Nützliches`: Tipps, Anleitungen, Strategien, Analysen und Allianzmaterial
 - `Styleguides`: verbindliche Regeln für Gestaltung und Textformatierung

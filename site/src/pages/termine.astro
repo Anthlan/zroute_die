@@ -1,0 +1,89 @@
+---
+import "../styles/global.css";
+import EventCard from "../components/EventCard.astro";
+import MonthlyCalendar from "../components/MonthlyCalendar.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import eventsData from "../data/events.generated.json";
+
+const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Berlin" }).format(new Date());
+const upcomingEvents = eventsData.items.filter((event) => event.date >= today);
+const pastEvents = eventsData.items.filter((event) => event.date < today).reverse();
+
+const relativeLabel = (date) => {
+  const difference = Math.round((new Date(`${date}T12:00:00Z`) - new Date(`${today}T12:00:00Z`)) / 86400000);
+  if (difference === 0) return "Heute";
+  if (difference === 1) return "Morgen";
+  return null;
+};
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Kommende und vergangene Termine der DIE-Allianz." />
+    <link rel="icon" type="image/svg+xml" href="/zroute_die/favicon.svg" />
+    <title>Termine · DIE-Allianzarchiv</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <SiteHeader active="events" />
+
+      <main class="events-main" id="main-content">
+        <section class="events-hero" aria-labelledby="events-title">
+          <div>
+            <p class="eyebrow">Allianzplanung</p>
+            <h1 id="events-title">Termine</h1>
+          </div>
+          <p>
+            Wichtige Events auf einen Blick. Jeder Termin kann direkt in den persönlichen Kalender
+            übernommen werden.
+          </p>
+          <dl class="archive-stats" aria-label="Umfang der Termine">
+            <div><dt>{upcomingEvents.length}</dt><dd>Kommend</dd></div>
+            <div><dt>{pastEvents.length}</dt><dd>Vergangen</dd></div>
+          </dl>
+        </section>
+
+        <MonthlyCalendar events={eventsData.items} />
+
+        <section class="events-section" aria-labelledby="upcoming-events-title">
+          <header class="content-section-heading">
+            <div>
+              <p class="eyebrow">Nicht verpassen</p>
+              <h2 id="upcoming-events-title">Kommende Events</h2>
+            </div>
+            <p>Chronologisch sortiert – der nächste Termin steht immer oben.</p>
+          </header>
+
+          {upcomingEvents.length > 0 ? (
+            <div class="event-list">
+              {upcomingEvents.map((event) => <EventCard event={event} relativeLabel={relativeLabel(event.date)} />)}
+            </div>
+          ) : (
+            <p class="events-empty">Aktuell sind keine kommenden Events eingetragen.</p>
+          )}
+        </section>
+
+        {pastEvents.length > 0 && (
+          <section class="events-section past-events" aria-labelledby="past-events-title">
+            <header class="content-section-heading">
+              <div>
+                <p class="eyebrow">Rückblick</p>
+                <h2 id="past-events-title">Vergangene Events</h2>
+              </div>
+              <p>Abgelaufene Termine bleiben zur Orientierung sichtbar.</p>
+            </header>
+            <div class="event-list">
+              {pastEvents.map((event) => <EventCard event={event} />)}
+            </div>
+          </section>
+        )}
+      </main>
+
+      <SiteFooter />
+    </div>
+  </body>
+</html>

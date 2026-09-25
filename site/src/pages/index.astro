@@ -2,12 +2,24 @@
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import EventCard from "../components/EventCard.astro";
 import newsData from "../data/news.generated.json";
+import eventsData from "../data/events.generated.json";
 import changelog from "../data/changelog.generated.json";
 
 const formatDate = (value) => value
   ? new Intl.DateTimeFormat("de-DE", { day: "2-digit", month: "long", year: "numeric", timeZone: "Europe/Berlin" }).format(new Date(value))
   : "Noch nicht veröffentlicht";
+
+const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Berlin" }).format(new Date());
+const upcomingEvents = eventsData.items.filter((event) => event.date >= today).slice(0, 3);
+
+const relativeLabel = (date) => {
+  const difference = Math.round((new Date(`${date}T12:00:00Z`) - new Date(`${today}T12:00:00Z`)) / 86400000);
+  if (difference === 0) return "Heute";
+  if (difference === 1) return "Morgen";
+  return null;
+};
 ---
 
 <!doctype html>
@@ -38,6 +50,7 @@ const formatDate = (value) => value
           </p>
           <dl class="archive-stats" aria-label="Umfang der Neuigkeiten">
             <div><dt>{newsData.items.length}</dt><dd>Meldungen</dd></div>
+            <div><dt>{upcomingEvents.length}</dt><dd>Termine</dd></div>
           </dl>
         </section>
 
@@ -66,6 +79,26 @@ const formatDate = (value) => value
             </div>
           ) : (
             <p class="news-empty">Noch sind keine Neuigkeiten veröffentlicht.</p>
+          )}
+        </section>
+
+        <section class="events-preview" aria-labelledby="events-preview-title">
+          <header class="content-section-heading">
+            <div>
+              <p class="eyebrow">Allianzplanung</p>
+              <h2 id="events-preview-title">Nächste Termine</h2>
+            </div>
+            <p><a class="section-text-link" href="/zroute_die/termine/">Alle Termine ansehen →</a></p>
+          </header>
+
+          {upcomingEvents.length > 0 ? (
+            <div class="event-list">
+              {upcomingEvents.map((event) => (
+                <EventCard event={event} compact relativeLabel={relativeLabel(event.date)} />
+              ))}
+            </div>
+          ) : (
+            <p class="events-empty">Aktuell sind keine kommenden Events eingetragen.</p>
           )}
         </section>
 
