@@ -89,6 +89,13 @@ const baseDocuments = [
     summary: "Vorgaben für konsistente Avatare und Porträts.",
   },
   {
+    source: "Styleguides/DlE-Stil – Charaktermodelle.md",
+    slug: "stil-charaktermodelle",
+    title: "Stil: Charaktermodelle",
+    section: "Gestaltung",
+    summary: "Verbindliches Seitenraster und Referenzumfang für neue Figuren.",
+  },
+  {
     source: "Styleguides/DlE-Stil – Allianz-Mitteilungen.md",
     slug: "stil-allianz-mitteilungen",
     title: "Stil: Allianz-Mitteilungen",

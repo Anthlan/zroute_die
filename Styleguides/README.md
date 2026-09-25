@@ -19,3 +19,4 @@ Dieser Ordner enthält die verbindlichen Gestaltungs- und Textregeln der DIE Dra
 - [`DlE-Stil – Chat-Bilder`](DlE-Stil%20%E2%80%93%20Chat-Bilder.md) – filmische Allianz-Momentaufnahmen
 - [`DlE-Stil – Chibi-Chatbilder`](DlE-Stil%20%E2%80%93%20Chibi-Chatbilder.md) – bewusst überzeichnete Reaktionsbilder
 - [`DlE-Stil – Avatarbilder`](DlE-Stil%20%E2%80%93%20Avatarbilder.md) – konsistente Profilbilder
+- [`DlE-Stil – Charaktermodelle`](DlE-Stil%20%E2%80%93%20Charaktermodelle.md) – verbindliche Modellbögen für neue und wiederkehrende Figuren

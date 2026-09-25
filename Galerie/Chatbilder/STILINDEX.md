@@ -80,6 +80,8 @@ Dieser Index ordnet jedes Chatbild einer der drei groben Stilgruppen aus der Cha
 - [2026_09_21_0708_Montagmorgen_Somea.png](2026_09_21_0708_Montagmorgen_Somea.png)
 - [2026_09_21_0738_ShopReset_Anthlan_Somea_DaVinci1986.png](2026_09_21_0738_ShopReset_Anthlan_Somea_DaVinci1986.png)
 - [2026_09_24_1503_ZehnWichtigeChats_mysteryZ.png](2026_09_24_1503_ZehnWichtigeChats_mysteryZ.png)
+- [2026_09_25_1505_Drachenritt_mysteryZ.png](2026_09_25_1505_Drachenritt_mysteryZ.png)
+- [2026_09_25_1505_Level28_Drachenherz.png](2026_09_25_1505_Level28_Drachenherz.png)
 
 ## S3 – Chibi-Reaktion
 

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "dropboxFolder": "/Dateianfragen/ZRoute Upload-Inbox",
+  "lastCheckedAt": "2026-09-25T20:45:39+02:00",
+  "processed": [
+    {
+      "fileId": "id:nTVVCXDkSgcAAAAAAAAADA",
+      "revision": "0165c4e5e79b9cc000000038a389113",
+      "sourcePath": "/Dateianfragen/ZRoute Upload-Inbox/2026-09-25 - File_000000004F48820ca58905c931378082.png",
+      "destinationPath": "Galerie/Chatbilder/2026_09_25_1505_Level28_Drachenherz.png"
+    },
+    {
+      "fileId": "id:nTVVCXDkSgcAAAAAAAAADQ",
+      "revision": "0165c4f8f47a390000000038a389113",
+      "sourcePath": "/Dateianfragen/ZRoute Upload-Inbox/2026-09-25 - File_00000000113481F49da07d876e1b47f3.png",
+      "destinationPath": "Galerie/Avatare/Hitmann_2026_09_25_1630.png"
+    },
+    {
+      "fileId": "id:nTVVCXDkSgcAAAAAAAAACw",
+      "revision": "0165c4e5e21c9a6000000038a389113",
+      "sourcePath": "/Dateianfragen/ZRoute Upload-Inbox/2026-09-25 - File_00000000F388820c83fddc7909c60cb6.png",
+      "destinationPath": "Galerie/Chatbilder/2026_09_25_1505_Drachenritt_mysteryZ.png"
+    }
+  ]
+}
