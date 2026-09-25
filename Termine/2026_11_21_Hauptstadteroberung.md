@@ -1,6 +1,6 @@
 ---
 title: "Hauptstadteroberung"
-date: "2026-11-07"
+date: "2026-11-21"
 time: "15:00"
 end: "19:00"
 category: "Server-Event"

@@ -1,6 +1,6 @@
 # Tipps
 
-Dieser Ordner sammelt kurze, direkt teilbare Tipps für die Allianz. Ein Tipp soll knapp, praktisch und ohne längere Einführung verständlich sein.
+Dieser Ordner sammelt ausführliche Wissensartikel zu den Tipps der Allianz. Die Markdown-Datei darf und soll mehr Kontext liefern als die kompakte Allianz-Mitteilung oder die Grafik: Funktionsweise, Anwendung, Rechenbeispiele, Grenzen, offene Punkte und weiterführende Quellen.
 
 Zusammengehörige Texte und Grafiken werden direkt hier abgelegt und erhalten denselben eindeutigen Basisnamen.
 
@@ -8,13 +8,19 @@ Für die Gestaltung der Grafiken gilt die verbindliche Richtlinie [`DIE-Stil –
 
 ## Aufbau einer Tipp-Datei
 
-Jede Markdown-Datei enthält drei klar getrennte Bereiche:
+Jede Markdown-Datei soll, soweit für den jeweiligen Tipp sinnvoll, diese Bereiche enthalten:
 
-1. **Wofür ist dieser Tipp?** – eine kurze Einordnung von Zweck und Nutzen.
-2. **Tipp** – eine übersichtlich formatierte Markdown-Fassung mit Zwischenüberschriften, Listen, Tabellen oder hervorgehobenen Hinweisen.
-3. **HTML-Block zum Kopieren** – der vollständige Ingame-Text in einem `html`-Codeblock, ohne Escape-Zeichen und direkt kopierbar.
+1. **Kurzfassung und Grafik** – schnelle Orientierung sowie die aktuelle Tippgrafik.
+2. **Wofür ist dieser Tipp?** – Zweck, Nutzen und geeignete Situationen.
+3. **Funktionsweise und Anleitung** – die Mechanik und ein nachvollziehbarer Ablauf.
+4. **Beispiele und Einordnung** – Berechnungen, Varianten oder Entscheidungshilfen.
+5. **Grenzen und offene Punkte** – Risiken, versionsabhängige Aussagen und noch zu prüfende Details.
+6. **Quellen und Verlässlichkeit** – Ingame-Belege, seriöse externe Quellen und Stand der Prüfung.
+7. **Allianz-Mitteilung zum Kopieren** – der vollständige Ingame-Text in einem `html`-Codeblock, ohne Escape-Zeichen und direkt kopierbar.
 
-Der HTML-Block übernimmt den freigegebenen Ingame-Text inhaltlich unverändert.
+Der HTML-Block übernimmt den freigegebenen Ingame-Text inhaltlich unverändert. Zusatzinformationen gehören in den Wissensartikel und nicht ungeprüft in die Allianz-Mitteilung.
+
+Externe Informationen werden nach Möglichkeit online gegengeprüft und direkt verlinkt. Community-Aussagen müssen als solche erkennbar sein. Bei widersprüchlichen Angaben gilt die aktuelle Ingame-Anzeige; Unklarheiten werden als offen beziehungsweise noch zu testen markiert.
 
 ## Benennungsregeln
 
