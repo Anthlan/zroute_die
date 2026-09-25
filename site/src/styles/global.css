@@ -2338,6 +2338,20 @@ h1 {
   object-fit: contain;
 }
 
+.markdown-content img[alt="Ingame-Buffübersicht mit Hilfslimit 25 und Hilfszeit 742"] {
+  max-width: min(100%, 440px);
+  margin-bottom: 10px;
+}
+
+.markdown-content p:has(> img[alt="Ingame-Buffübersicht mit Hilfslimit 25 und Hilfszeit 742"]) + p {
+  max-width: 440px;
+  margin: 0 auto 24px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
 .markdown-content code {
   padding: 0.14em 0.35em;
   border: 1px solid rgba(255, 255, 255, 0.08);

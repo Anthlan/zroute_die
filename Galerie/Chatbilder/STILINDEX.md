@@ -87,15 +87,9 @@ Dieser Index ordnet jedes Chatbild einer der drei groben Stilgruppen aus der Cha
 ## S3 – Chibi-Reaktion
 
 - [2026_09_23_0751_AngriffsknopfChibi_Somea_Anthlan.png](Chibi/2026_09_23_0751_AngriffsknopfChibi_Somea_Anthlan.png)
-- [2026_09_23_0803_Moin_Anthlan.png](Chibi/2026_09_23_0803_Moin_Anthlan.png)
-- [2026_09_23_2258_GuteNacht_Anthlan.png](Chibi/2026_09_23_2258_GuteNacht_Anthlan.png)
-- [2026_09_23_2258_GuteNacht_Anthlan_v2.png](Chibi/2026_09_23_2258_GuteNacht_Anthlan_v2.png)
-- [2026_09_23_2258_GuteNacht_Anthlan_v3.png](Chibi/2026_09_23_2258_GuteNacht_Anthlan_v3.png)
-- [2026_09_25_2133_GutenMorgen_Somea.png](Chibi/2026_09_25_2133_GutenMorgen_Somea.png)
-- [2026_09_25_2135_GuteNacht_Somea.png](Chibi/2026_09_25_2135_GuteNacht_Somea.png)
-- [2026_09_25_2136_GutenMorgen_mysteryZ.png](Chibi/2026_09_25_2136_GutenMorgen_mysteryZ.png)
-- [2026_09_25_2137_GuteNacht_mysteryZ.png](Chibi/2026_09_25_2137_GuteNacht_mysteryZ.png)
 - [2026_09_25_2145_JutenMorjen_Somea_Berlin.png](Chibi/2026_09_25_2145_JutenMorjen_Somea_Berlin.png)
 - [2026_09_25_2147_JuteNacht_Somea_Berlin.png](Chibi/2026_09_25_2147_JuteNacht_Somea_Berlin.png)
 - [2026_09_25_2149_GutenMorgenVomRhein_mysteryZ_Duesseldorf.png](Chibi/2026_09_25_2149_GutenMorgenVomRhein_mysteryZ_Duesseldorf.png)
 - [2026_09_25_2150_GuteNachtVomRhein_mysteryZ_Duesseldorf.png](Chibi/2026_09_25_2150_GuteNachtVomRhein_mysteryZ_Duesseldorf.png)
+- [2026_09_25_2156_MoinAusHamburg_Anthlan.png](Chibi/2026_09_25_2156_MoinAusHamburg_Anthlan.png)
+- [2026_09_25_2158_GuteNachtVonDerElbe_Anthlan_Hamburg.png](Chibi/2026_09_25_2158_GuteNachtVonDerElbe_Anthlan_Hamburg.png)

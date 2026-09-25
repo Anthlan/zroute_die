@@ -88,7 +88,9 @@ Die optimale Heilzeit ist damit **kein allgemeiner Festwert**. Sie verändert si
 
 ![Ingame-Buffübersicht mit Hilfslimit 25 und Hilfszeit 742](Tipp_08_Hilfszeit_Buff.jpg)
 
-*In der Buffübersicht unter „Wirtschaftstyp“ stehen die persönlichen Werte für Hilfslimit und Hilfszeit. Für die Berechnung wird der obere Gesamtwert verwendet – nicht nur einer der darunter aufgeführten Einzelboni.*
+*(So gelangt ihr dorthin: Basis auf der Weltkarte anklicken → „Schild setzen“ auswählen → oben zum Reiter „Wirtschaftstyp“ wechseln.)*
+
+Für die Berechnung wird jeweils der obere Gesamtwert verwendet – nicht nur einer der darunter aufgeführten Einzelboni.
 
 Der Screenshot zeigt:
 
