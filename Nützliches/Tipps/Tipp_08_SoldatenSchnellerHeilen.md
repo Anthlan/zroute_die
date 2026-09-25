@@ -1,3 +1,12 @@
+---
+arten:
+  - Anleitung
+  - Optimierung
+themen:
+  - Truppen
+  - Allianz
+---
+
 # 💡 Tipp #8 – Soldaten schneller heilen
 
 ## Das Wichtigste in Kürze

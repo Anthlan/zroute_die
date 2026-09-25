@@ -1,3 +1,12 @@
+---
+arten:
+  - Anleitung
+  - Strategie
+themen:
+  - Kampf
+  - Allianz
+---
+
 # 💡 Tipp #2 – Sammelangriffe
 
 ## Das Wichtigste in Kürze

@@ -2,6 +2,8 @@
 
 Dieser Ordner enthält taktische Erkenntnisse, Kampfkonzepte und längerfristige Planungen für die Allianz.
 
+Die Website führt **Strategien** derzeit nicht als eigene Rubrik. Öffentliches Spielwissen wird in der nummerierten Tippserie gepflegt und dort mit dem Art-Tag `Strategie` gekennzeichnet. Dieser Quellordner bleibt für bestehende Ablagehinweise und eine mögliche spätere Nutzung erhalten.
+
 Die Inhalte sollen handlungsorientiert, nachvollziehbar und für spätere Einsätze wiederverwendbar sein.
 
 ## Benennungsregeln

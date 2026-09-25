@@ -2,6 +2,8 @@
 
 Dieser Ordner enthält Auswertungen zu Events, Kämpfen, Accounts und Serverentwicklungen.
 
+Die Website führt **Analysen** derzeit nicht als eigene Rubrik. Dieser Quellordner bleibt für bestehende Ablagehinweise und eine mögliche spätere Nutzung erhalten; öffentliches Spielwissen erscheint vorerst in der nummerierten Tippserie.
+
 Analysen dokumentieren Beobachtungen, Datengrundlage und Schlussfolgerungen so, dass daraus Strategien oder Entscheidungen abgeleitet werden können.
 
 ## Benennungsregeln

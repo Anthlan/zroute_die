@@ -1,3 +1,12 @@
+---
+arten:
+  - Anleitung
+  - Strategie
+themen:
+  - Events
+  - Allianz
+---
+
 # 💡 Tipp #5 – Güterzug
 
 ## Das Wichtigste in Kürze

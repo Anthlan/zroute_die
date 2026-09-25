@@ -27,6 +27,9 @@ const activeSection = document.section === "Gestaltung"
     : "";
 const overviewUrl = document.section === "Gestaltung" ? "/zroute_die/docs/styleguides/" : "/zroute_die/docs/";
 const overviewLabel = document.section === "Gestaltung" ? "Styleguides" : "Nützliches";
+const tipArtOptions = ["Anleitung", "Strategie", "Optimierung"];
+const tipTopicOptions = ["Allianz", "Events", "Kampf", "Truppen", "Aufbau", "Weltkarte"];
+const isTipsOverview = document.slug === "tipps" && childDocuments.length > 0;
 ---
 
 <!doctype html>
@@ -95,28 +98,99 @@ const overviewLabel = document.section === "Gestaltung" ? "Styleguides" : "Nütz
               <p class="eyebrow">{document.section}</p>
               <h1>{document.title}</h1>
               <p>{document.summary}</p>
+              {document.kind === "tip" && (
+                <dl class="tip-taxonomy tip-taxonomy-detail" aria-label="Einordnung des Tipps">
+                  <div>
+                    <dt>Art</dt>
+                    <dd>{document.artTags.map((tag) => <span class="tip-tag is-art">{tag}</span>)}</dd>
+                  </div>
+                  <div>
+                    <dt>Thema</dt>
+                    <dd>{document.topicTags.map((tag) => <span class="tip-tag is-topic">{tag}</span>)}</dd>
+                  </div>
+                </dl>
+              )}
               <a href={document.repositoryUrl} target="_blank" rel="noopener noreferrer">
                 Markdown auf GitHub öffnen <span aria-hidden="true">↗</span>
               </a>
             </header>
-            {childDocuments.length > 0 && !document.parentSlug && (
-              <section class="knowledge-children" aria-labelledby="knowledge-children-title">
-                <div>
+            {isTipsOverview && (
+              <section class="knowledge-children tip-catalog" aria-labelledby="knowledge-children-title" data-tip-catalog>
+                <div class="tip-catalog-heading">
                   <p class="eyebrow">Informationsseiten</p>
-                  <h2 id="knowledge-children-title">Verfügbare Tipps</h2>
+                  <h2 id="knowledge-children-title">Alle Tipps</h2>
+                  <p>Wähle je eine Art und ein Thema. Beide Filter werden miteinander kombiniert.</p>
                 </div>
-                <div class="knowledge-card-list">
+
+                <form class="tip-filter-panel" aria-label="Tipps filtern">
+                  <fieldset>
+                    <legend>Art</legend>
+                    <div class="tip-filter-options">
+                      <label>
+                        <input type="radio" name="tip-art" value="all" checked />
+                        <span>Alle</span>
+                      </label>
+                      {tipArtOptions.map((tag) => (
+                        <label>
+                          <input type="radio" name="tip-art" value={tag} />
+                          <span>{tag}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend>Thema</legend>
+                    <div class="tip-filter-options">
+                      <label>
+                        <input type="radio" name="tip-topic" value="all" checked />
+                        <span>Alle</span>
+                      </label>
+                      {tipTopicOptions.map((tag) => (
+                        <label>
+                          <input type="radio" name="tip-topic" value={tag} />
+                          <span>{tag}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </fieldset>
+                </form>
+
+                <p class="tip-result-count" aria-live="polite" aria-atomic="true" data-tip-result-count>
+                  {childDocuments.length} Tipps
+                </p>
+
+                <div class="knowledge-card-list" id="tip-card-list">
                   {childDocuments.map((item) => (
-                    <a class="knowledge-card" href={item.url}>
+                    <a
+                      class="knowledge-card"
+                      href={item.url}
+                      data-tip-card
+                      data-art={item.artTags.join("|")}
+                      data-topic={item.topicTags.join("|")}
+                    >
                       <div>
                         <span>Informationen · Tipp</span>
                         <h3>{item.title}</h3>
                         <p>{item.summary}</p>
+                        <dl class="tip-taxonomy" aria-label={`Tags für ${item.title}`}>
+                          <div>
+                            <dt>Art</dt>
+                            <dd>{item.artTags.map((tag) => <span class="tip-tag is-art">{tag}</span>)}</dd>
+                          </div>
+                          <div>
+                            <dt>Thema</dt>
+                            <dd>{item.topicTags.map((tag) => <span class="tip-tag is-topic">{tag}</span>)}</dd>
+                          </div>
+                        </dl>
                         <strong>Informationsseite öffnen →</strong>
                       </div>
                       {item.imageUrl && <img src={item.imageUrl} alt="" loading="lazy" />}
                     </a>
                   ))}
+                </div>
+                <div class="tip-filter-empty" hidden data-tip-filter-empty>
+                  <strong>Keine Tipps für diese Kombination gefunden.</strong>
+                  <span>Wähle eine andere Art oder ein anderes Thema.</span>
                 </div>
               </section>
             )}
@@ -203,6 +277,47 @@ const overviewLabel = document.section === "Gestaltung" ? "Styleguides" : "Nütz
     </div>
 
     <script>
+      const tipCatalogs = document.querySelectorAll("[data-tip-catalog]");
+
+      for (const catalog of tipCatalogs) {
+        if (!(catalog instanceof HTMLElement)) continue;
+
+        const cards = [...catalog.querySelectorAll("[data-tip-card]")];
+        const filterInputs = [...catalog.querySelectorAll('input[type="radio"]')];
+        const resultCount = catalog.querySelector("[data-tip-result-count]");
+        const emptyState = catalog.querySelector("[data-tip-filter-empty]");
+
+        const selectedValue = (name) => {
+          const input = catalog.querySelector(`input[name="${name}"]:checked`);
+          return input instanceof HTMLInputElement ? input.value : "all";
+        };
+
+        const applyTipFilters = () => {
+          const selectedArt = selectedValue("tip-art");
+          const selectedTopic = selectedValue("tip-topic");
+          let visibleCount = 0;
+
+          for (const card of cards) {
+            if (!(card instanceof HTMLElement)) continue;
+
+            const artTags = (card.dataset.art ?? "").split("|").filter(Boolean);
+            const topicTags = (card.dataset.topic ?? "").split("|").filter(Boolean);
+            const artMatches = selectedArt === "all" || artTags.includes(selectedArt);
+            const topicMatches = selectedTopic === "all" || topicTags.includes(selectedTopic);
+            const isVisible = artMatches && topicMatches;
+            card.hidden = !isVisible;
+            if (isVisible) visibleCount += 1;
+          }
+
+          if (resultCount) {
+            resultCount.textContent = `${visibleCount} ${visibleCount === 1 ? "Tipp" : "Tipps"}`;
+          }
+          if (emptyState instanceof HTMLElement) emptyState.hidden = visibleCount !== 0;
+        };
+
+        for (const input of filterInputs) input.addEventListener("change", applyTipFilters);
+      }
+
       const tipViewers = document.querySelectorAll("[data-tip-viewer]");
 
       for (const viewer of tipViewers) {

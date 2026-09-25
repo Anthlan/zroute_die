@@ -4,7 +4,7 @@
 
 Charaktermodelle sind die verbindliche visuelle Quelle für wiederkehrende Figuren. Sie müssen Gesicht, Körperbau, Kleidung, Farben und charakteristische Details so eindeutig festlegen, dass neue Avatare, Chatbilder und Szenen dieselbe Figur zuverlässig reproduzieren können.
 
-Diese Richtlinie wurde aus allen zwölf vorhandenen Referenzmodellen in `Galerie/Charaktermodelle` abgeleitet. Die zusätzliche Datei `Drachenherz_Szene_Trinkhalle.png` wurde als Stilreferenz, nicht als Layoutvorlage gewertet. Elf der zwölf Modellbögen verwenden bereits 1024 × 1536 Pixel; `Helltrain_Referenzmodell.jpg` ist eine ältere, abweichende Vorlage und begründet keine Ausnahme vom neuen Standard.
+Diese Richtlinie wurde aus allen vierzehn vorhandenen Referenzmodellen in `Galerie/Charaktermodelle` abgeleitet. Alle Modellbögen verwenden das Format 1024 × 1536 Pixel.
 
 ## Verbindliches Grundformat
 
@@ -211,7 +211,6 @@ Ein neues Charaktermodell wird erst abgelegt, wenn alle Fragen mit Ja beantworte
 - grelle Sci-Fi-Oberflächen und Neonrahmen
 - zufällige Wappen, Signaturen, Slogans und nicht bestätigte Charaktereigenschaften
 - unscharfe, niedrig aufgelöste oder sichtbar komprimierte Enddateien
-- die ältere Helltrain-Auflösung als technische Vorlage
 
 ## Ablage und Benennung
 

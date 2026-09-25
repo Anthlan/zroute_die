@@ -1,3 +1,12 @@
+---
+arten:
+  - Strategie
+  - Optimierung
+themen:
+  - Truppen
+  - Weltkarte
+---
+
 # 💡 Tipp #1 – Truppen effizient bewegen
 
 ## Das Wichtigste in Kürze

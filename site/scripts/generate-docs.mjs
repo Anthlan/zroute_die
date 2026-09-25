@@ -30,28 +30,7 @@ const baseDocuments = [
     slug: "tipps",
     title: "Tipps",
     section: "Informationen",
-    summary: "Kurze Hinweise, Tricks und Entscheidungshilfen für den Spielalltag.",
-  },
-  {
-    source: "Nützliches/Anleitungen/README.md",
-    slug: "anleitungen",
-    title: "Anleitungen",
-    section: "Informationen",
-    summary: "Schritt-für-Schritt-Erklärungen für wiederkehrende Abläufe.",
-  },
-  {
-    source: "Nützliches/Strategien/README.md",
-    slug: "strategien",
-    title: "Strategien",
-    section: "Informationen",
-    summary: "Taktiken und abgestimmte Vorgehensweisen der Allianz.",
-  },
-  {
-    source: "Nützliches/Analysen/README.md",
-    slug: "analysen",
-    title: "Analysen",
-    section: "Informationen",
-    summary: "Auswertungen, Vergleiche und nachvollziehbare Erkenntnisse.",
+    summary: "Tipps und Spielwissen für den Alltag, gefiltert nach Art und Thema.",
   },
   {
     source: "Nützliches/Allianz/README.md",
@@ -163,6 +142,52 @@ const plainText = (value) => value
   .replace(/\s+/g, " ")
   .trim();
 
+const tipArtTags = ["Anleitung", "Strategie", "Optimierung"];
+const tipTopicTags = ["Allianz", "Events", "Kampf", "Truppen", "Aufbau", "Weltkarte"];
+
+const parseFrontmatter = (markdown) => {
+  const normalizedMarkdown = markdown.replace(/^\uFEFF/, "");
+  const match = normalizedMarkdown.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+
+  if (!match) return { data: {}, content: normalizedMarkdown };
+
+  const data = {};
+  let activeKey = null;
+
+  for (const line of match[1].split(/\r?\n/)) {
+    const keyMatch = line.match(/^([a-zA-Z][\w-]*):\s*(.*)$/);
+    if (keyMatch) {
+      activeKey = keyMatch[1];
+      const inlineValue = keyMatch[2].trim();
+      data[activeKey] = inlineValue
+        ? inlineValue.replace(/^\[|\]$/g, "").split(",").map((value) => value.trim()).filter(Boolean)
+        : [];
+      continue;
+    }
+
+    const listItemMatch = line.match(/^\s+-\s+(.+?)\s*$/);
+    if (activeKey && listItemMatch) data[activeKey].push(listItemMatch[1]);
+  }
+
+  return {
+    data,
+    content: normalizedMarkdown.slice(match[0].length).replace(/^(?:\r?\n)+/, ""),
+  };
+};
+
+const validateTipTags = (tags, allowedTags, field, source) => {
+  if (!Array.isArray(tags) || tags.length === 0) {
+    throw new Error(`${source}: Frontmatter-Feld "${field}" fehlt oder ist leer.`);
+  }
+
+  const unknownTags = tags.filter((tag) => !allowedTags.includes(tag));
+  if (unknownTags.length > 0) {
+    throw new Error(`${source}: Unbekannte ${field}-Tags: ${unknownTags.join(", ")}.`);
+  }
+
+  return tags;
+};
+
 const tipDirectory = path.join(repositoryDirectory, "Nützliches", "Tipps");
 const tipFileNames = (await readdir(tipDirectory, { withFileTypes: true }))
   .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith(".md") && entry.name.toLowerCase() !== "readme.md")
@@ -181,7 +206,8 @@ const tipDocuments = [];
 for (const fileName of tipFileNames) {
   const source = `Nützliches/Tipps/${fileName}`;
   const sourcePath = path.join(tipDirectory, fileName);
-  const markdown = await readFile(sourcePath, "utf8");
+  const sourceMarkdown = await readFile(sourcePath, "utf8");
+  const { data: frontmatter, content: markdown } = parseFrontmatter(sourceMarkdown);
   const baseName = path.basename(fileName, path.extname(fileName));
   const heading = markdown.match(/^#\s+(.+)$/m)?.[1] ?? baseName;
   const title = plainText(heading).replace(/^💡\s*/u, "");
@@ -200,6 +226,8 @@ for (const fileName of tipFileNames) {
     summary,
     parentSlug: "tipps",
     kind: "tip",
+    artTags: validateTipTags(frontmatter.arten, tipArtTags, "arten", source),
+    topicTags: validateTipTags(frontmatter.themen, tipTopicTags, "themen", source),
     imageUrl: image?.webUrl ?? null,
     imageRepositoryUrl: image?.repositoryUrl ?? null,
   });
@@ -209,7 +237,7 @@ const documents = [...baseDocuments, ...tipDocuments];
 
 const sectionDescriptions = {
   Projekt: "Orientierung, Regeln und Hintergrund zum Archiv.",
-  Informationen: "Tipps, Anleitungen, Strategien, Analysen und Allianzinformationen.",
+  Informationen: "Tipps und Spielwissen sowie Informationen zur Allianz.",
   Gestaltung: "Verbindliche Regeln für Bilder und Texte.",
   Bildarchiv: "Struktur und Pflege der visuellen Inhalte.",
 };
@@ -296,7 +324,8 @@ const items = [];
 
 for (const document of documents) {
   const sourcePath = path.join(repositoryDirectory, ...document.source.split("/"));
-  const markdown = await readFile(sourcePath, "utf8");
+  const sourceMarkdown = await readFile(sourcePath, "utf8");
+  const { content: markdown } = parseFrontmatter(sourceMarkdown);
   const normalizedMarkdown = resolveLocalMarkdownImages(
     normalizeWebsiteSpelling(markdown, document.source),
     document.source,

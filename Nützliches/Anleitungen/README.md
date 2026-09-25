@@ -2,6 +2,8 @@
 
 Dieser Ordner enthält ausführlichere Schritt-für-Schritt-Anleitungen zu Spielmechaniken, Abläufen und wiederkehrenden Aufgaben.
 
+Die Website führt **Anleitungen** derzeit nicht als eigene Rubrik. Öffentliches Spielwissen wird in der nummerierten Tippserie gepflegt und dort mit dem Art-Tag `Anleitung` gekennzeichnet. Dieser Quellordner bleibt für bestehende Ablagehinweise und eine mögliche spätere Nutzung erhalten.
+
 Zusammengehörige Text- und Bilddateien werden direkt hier abgelegt und über denselben Basisnamen miteinander verbunden.
 
 ## Benennungsregeln

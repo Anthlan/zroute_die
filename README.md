@@ -16,7 +16,7 @@ Jeder Fachordner enthält eine eigene `README.md` mit seinem Zweck, seiner vorge
 | [`Aktuelles`](Aktuelles/README.md) | Manuell gepflegte Neuigkeiten für die Startseite |
 | [`Termine`](Termine/README.md) | Kommende und vergangene Allianz-Events mit Kalender-Download |
 | [`Galerie`](Galerie/README.md) | Avatare, Charaktermodelle und Chatbilder |
-| [`Nützliches`](Nützliches/README.md) | Tipps, Anleitungen, Strategien, Analysen und Allianzmaterial |
+| [`Nützliches`](Nützliches/README.md) | Tipps und Spielwissen mit Art-/Thema-Tags sowie Allianzmaterial |
 | [`Styleguides`](Styleguides/README.md) | Gestaltungs- und Textregeln für konsistente DIE-Inhalte |
 | [`Archiv`](Archiv/README.md) | Ersetzte, veraltete oder historisch relevante Inhalte |
 | [`site`](site) | Technische Quellen der automatisch erzeugten Website |

@@ -1,3 +1,12 @@
+---
+arten:
+  - Strategie
+themen:
+  - Events
+  - Kampf
+  - Allianz
+---
+
 # 💡 Tipp #7 – Allianz-Hinterhalt
 
 ## Das Wichtigste in Kürze

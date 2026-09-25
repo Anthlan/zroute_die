@@ -1,3 +1,12 @@
+---
+arten:
+  - Anleitung
+  - Optimierung
+themen:
+  - Allianz
+  - Aufbau
+---
+
 # 💡 Tipp #3 – Hauptstadtrollen
 
 ## Das Wichtigste in Kürze

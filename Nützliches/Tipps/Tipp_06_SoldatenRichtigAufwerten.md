@@ -1,3 +1,12 @@
+---
+arten:
+  - Anleitung
+  - Optimierung
+themen:
+  - Truppen
+  - Aufbau
+---
+
 # 💡 Tipp #6 – Soldaten richtig aufwerten
 
 ## Das Wichtigste in Kürze

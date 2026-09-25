@@ -4,6 +4,7 @@ Dieser Index ordnet jedes Chatbild einer der drei groben Stilgruppen aus der Cha
 
 ## S1 – Filmische Allianz-Fantasy
 
+- [2026_08_24_0821_Trinkhalle_Drachenherz.png](2026_08_24_0821_Trinkhalle_Drachenherz.png)
 - [2026_08_25_1348_ZuendelnErlaubt_Anthlan_Somea.png](2026_08_25_1348_ZuendelnErlaubt_Anthlan_Somea.png)
 - [2026_08_30_0718_SchlachtAmFaden_Anthlan_Somea.png](2026_08_30_0718_SchlachtAmFaden_Anthlan_Somea.png)
 - [2026_08_30_0744_Strategierunde.png](2026_08_30_0744_Strategierunde.png)
@@ -90,3 +91,11 @@ Dieser Index ordnet jedes Chatbild einer der drei groben Stilgruppen aus der Cha
 - [2026_09_23_2258_GuteNacht_Anthlan.png](Chibi/2026_09_23_2258_GuteNacht_Anthlan.png)
 - [2026_09_23_2258_GuteNacht_Anthlan_v2.png](Chibi/2026_09_23_2258_GuteNacht_Anthlan_v2.png)
 - [2026_09_23_2258_GuteNacht_Anthlan_v3.png](Chibi/2026_09_23_2258_GuteNacht_Anthlan_v3.png)
+- [2026_09_25_2133_GutenMorgen_Somea.png](Chibi/2026_09_25_2133_GutenMorgen_Somea.png)
+- [2026_09_25_2135_GuteNacht_Somea.png](Chibi/2026_09_25_2135_GuteNacht_Somea.png)
+- [2026_09_25_2136_GutenMorgen_mysteryZ.png](Chibi/2026_09_25_2136_GutenMorgen_mysteryZ.png)
+- [2026_09_25_2137_GuteNacht_mysteryZ.png](Chibi/2026_09_25_2137_GuteNacht_mysteryZ.png)
+- [2026_09_25_2145_JutenMorjen_Somea_Berlin.png](Chibi/2026_09_25_2145_JutenMorjen_Somea_Berlin.png)
+- [2026_09_25_2147_JuteNacht_Somea_Berlin.png](Chibi/2026_09_25_2147_JuteNacht_Somea_Berlin.png)
+- [2026_09_25_2149_GutenMorgenVomRhein_mysteryZ_Duesseldorf.png](Chibi/2026_09_25_2149_GutenMorgenVomRhein_mysteryZ_Duesseldorf.png)
+- [2026_09_25_2150_GuteNachtVomRhein_mysteryZ_Duesseldorf.png](Chibi/2026_09_25_2150_GuteNachtVomRhein_mysteryZ_Duesseldorf.png)

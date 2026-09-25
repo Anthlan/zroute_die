@@ -6,6 +6,26 @@ Zusammengehörige Texte und Grafiken werden direkt hier abgelegt und erhalten de
 
 Für die Gestaltung der Grafiken gilt die verbindliche Richtlinie [`DIE-Stil – Tipps`](../../Styleguides/DlE-Stil%20%E2%80%93%20Tipps.md).
 
+## Metadaten und Filter
+
+Jede Tipp-Datei beginnt mit Frontmatter. Die beiden Merkmalsgruppen werden getrennt gepflegt und von der Website für Karten, Detailseiten und die kombinierte Filterung verwendet:
+
+```yaml
+---
+arten:
+  - Anleitung
+  - Strategie
+themen:
+  - Kampf
+  - Allianz
+---
+```
+
+- Erlaubte Werte für **Art**: `Anleitung`, `Strategie`, `Optimierung`
+- Erlaubte Werte für **Thema**: `Allianz`, `Events`, `Kampf`, `Truppen`, `Aufbau`, `Weltkarte`
+
+Pro Tipp ist mindestens ein Wert aus jeder Gruppe erforderlich. Das Frontmatter dient ausschließlich als Metadaten und wird nicht als Artikelinhalt ausgegeben.
+
 ## Aufbau einer Tipp-Datei
 
 Jede Markdown-Datei enthält die vollständige Wissensseite. Optional kann direkt vor der ausführlichen Einordnung eine Kurzfassung ergänzt werden:

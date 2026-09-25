@@ -1,3 +1,11 @@
+---
+arten:
+  - Anleitung
+themen:
+  - Weltkarte
+  - Allianz
+---
+
 # 💡 Tipp #4 – Richtig teleportieren
 
 ## Das Wichtigste in Kürze

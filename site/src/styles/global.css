@@ -1806,6 +1806,110 @@ h1 {
   font: 500 30px/1.15 Georgia, "Times New Roman", serif;
 }
 
+.tip-catalog-heading > p:not(.eyebrow) {
+  max-width: 680px;
+  margin: -10px 0 24px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.tip-filter-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.tip-filter-panel fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 16px 18px 18px;
+  border: 1px solid var(--line);
+  background: rgba(6, 9, 20, 0.38);
+}
+
+.tip-filter-panel legend {
+  padding: 0 7px;
+  color: var(--gold-pale);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tip-filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tip-filter-options label {
+  position: relative;
+  cursor: pointer;
+}
+
+.tip-filter-options input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tip-filter-options span {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(17, 25, 54, 0.64);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.tip-filter-options label:hover span,
+.tip-filter-options input:focus-visible + span {
+  border-color: var(--line-bright);
+  color: var(--ink);
+}
+
+.tip-filter-options input:focus-visible + span {
+  outline: 2px solid var(--gold-pale);
+  outline-offset: 2px;
+}
+
+.tip-filter-options input:checked + span {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, #efbd5f, #cf8f27);
+  color: #13101a;
+  box-shadow: 0 0 18px rgba(227, 173, 78, 0.12);
+}
+
+.tip-result-count {
+  margin: 0 0 12px;
+  color: var(--gold-pale);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tip-filter-empty {
+  display: grid;
+  gap: 7px;
+  padding: 28px;
+  border: 1px dashed var(--line-bright);
+  color: var(--muted);
+  text-align: center;
+}
+
+.tip-filter-empty[hidden],
+.knowledge-card[hidden] {
+  display: none;
+}
+
 .knowledge-card-list {
   display: grid;
   gap: 12px;
@@ -1851,6 +1955,67 @@ h1 {
   color: var(--muted);
   font-size: 13px;
   line-height: 1.5;
+}
+
+.tip-taxonomy {
+  display: grid;
+  gap: 9px;
+  margin: 18px 0 0;
+}
+
+.tip-taxonomy > div {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+}
+
+.tip-taxonomy dt {
+  padding-top: 5px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tip-taxonomy dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
+.tip-tag,
+.knowledge-card .tip-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 27px;
+  padding: 4px 9px;
+  border: 1px solid rgba(227, 173, 78, 0.28);
+  border-radius: 999px;
+  background: rgba(227, 173, 78, 0.08);
+  color: var(--gold-pale);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+.tip-tag.is-topic,
+.knowledge-card .tip-tag.is-topic {
+  border-color: rgba(118, 143, 214, 0.34);
+  background: rgba(68, 91, 157, 0.13);
+  color: #c4cff4;
+}
+
+.tip-taxonomy-detail {
+  max-width: 710px;
+  margin: 0 0 24px;
+  padding: 15px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .knowledge-card strong {
@@ -2768,6 +2933,19 @@ footer a {
 
   .knowledge-children {
     padding: 26px 20px;
+  }
+
+  .tip-filter-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .tip-filter-panel fieldset {
+    padding: 15px 14px 16px;
+  }
+
+  .tip-filter-options span {
+    min-height: 44px;
+    padding-inline: 14px;
   }
 
   .knowledge-card {

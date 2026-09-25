@@ -24,7 +24,7 @@ Auf dieser Website und im Repository wird die Allianz durchgängig als **DIE** b
 - `Aktuelles`: manuell gepflegte Neuigkeiten für die Startseite
 - `Termine`: Allianz-Events mit Datum, Uhrzeit und optionalem Kalender-Download
 - `Galerie`: Avatare, Charaktermodelle und Chatbilder
-- `Nützliches`: Tipps, Anleitungen, Strategien, Analysen und Allianzmaterial
+- `Nützliches`: Tipps und Spielwissen mit Art-/Thema-Tags sowie Allianzmaterial
 - `Styleguides`: verbindliche Regeln für Gestaltung und Textformatierung
 - `Archiv`: ersetzte, veraltete oder nur noch historisch relevante Fassungen
 - `site`: technische Quellen und Build-Skripte der Website
@@ -105,18 +105,6 @@ Spielername_Referenzmodell_Ganzkoerper.Dateiendung
 Spielername_Referenzmodell_Seite.Dateiendung
 Spielername_Referenzmodell_Gesicht.Dateiendung
 Spielername_Referenzmodell_Ausruestung.Dateiendung
-```
-
-Für charakterbezogene Szenen gilt:
-
-```text
-Spielername_Szene_Kurzbeschreibung.Dateiendung
-```
-
-Beispiel:
-
-```text
-Drachenherz_Szene_Trinkhalle.png
 ```
 
 Der Spielername wird in der im Spiel beziehungsweise auf dem Referenzbild verwendeten Groß- und Kleinschreibung übernommen.
