@@ -229,6 +229,28 @@ const normalizeWebsiteSpelling = (markdown, source) => {
   return normalized.replaceAll("DlE", "DIE").replaceAll("dle", "die");
 };
 
+const resolveLocalMarkdownImages = (markdown, source) => {
+  const sourceDirectory = path.posix.dirname(source);
+
+  return markdown.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (match, alt, imageTarget) => {
+    if (/^(?:[a-z]+:|\/|#)/i.test(imageTarget)) return match;
+
+    let decodedTarget;
+    try {
+      decodedTarget = decodeURIComponent(imageTarget);
+    } catch {
+      return match;
+    }
+
+    const sourcePath = path.posix.normalize(
+      path.posix.join(sourceDirectory, decodedTarget.replaceAll("\\", "/")),
+    );
+    const image = galleryItems.find((item) => item.sourcePath === sourcePath);
+
+    return image ? `![${alt}](${image.webUrl})` : match;
+  });
+};
+
 marked.setOptions({
   gfm: true,
   breaks: false,
@@ -248,7 +270,10 @@ const items = [];
 for (const document of documents) {
   const sourcePath = path.join(repositoryDirectory, ...document.source.split("/"));
   const markdown = await readFile(sourcePath, "utf8");
-  const normalizedMarkdown = normalizeWebsiteSpelling(markdown, document.source);
+  const normalizedMarkdown = resolveLocalMarkdownImages(
+    normalizeWebsiteSpelling(markdown, document.source),
+    document.source,
+  );
   const articleMarkdown = normalizedMarkdown.replace(/^#\s+.*?(?:\r?\n)+/, "");
   const html = await marked.parse(articleMarkdown);
   const tipSections = document.kind === "tip" ? splitLevelTwoSections(articleMarkdown) : [];

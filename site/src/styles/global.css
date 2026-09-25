@@ -1747,6 +1747,18 @@ h1 {
   margin-bottom: 0;
 }
 
+.markdown-content img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: min(82vh, 960px);
+  height: auto;
+  margin: 28px auto;
+  border: 1px solid var(--line);
+  background: #050814;
+  object-fit: contain;
+}
+
 .markdown-content code {
   padding: 0.14em 0.35em;
   border: 1px solid rgba(255, 255, 255, 0.08);
