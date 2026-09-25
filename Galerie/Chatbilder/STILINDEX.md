@@ -1,6 +1,6 @@
 # Stilindex der Chatbilder
 
-Dieser Index ordnet jedes Chatbild einer der drei groben Stilgruppen aus der Chatbild-Guideline zu. Die Zuordnung beschreibt die Darstellungsform, nicht Thema, Qualität oder Urheberschaft.
+Dieser Index ordnet jedes Chatbild einer der drei groben Stilgruppen aus der Chatbild-Guideline zu. Die Zuordnung beschreibt die Darstellungsform, nicht Thema, Qualität oder Urheberschaft. Sie wird beim Website-Build automatisch als Metadatum an den jeweiligen Galerieeintrag übernommen; jeder Bildlink muss deshalb exakt auf die zugehörige Datei zeigen.
 
 ## S1 – Filmische Allianz-Fantasy
 

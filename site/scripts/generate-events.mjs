@@ -71,7 +71,7 @@ const nextDate = (value) => {
   return date.toISOString().slice(0, 10);
 };
 
-const createCalendar = ({ title, date, time, end, location, summary, slug }) => {
+const createCalendar = ({ title, date, time, end, endDate, location, summary, slug }) => {
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
@@ -85,7 +85,7 @@ const createCalendar = ({ title, date, time, end, location, summary, slug }) => 
 
   if (time) {
     lines.push(`DTSTART;TZID=Europe/Berlin:${compactDate(date)}T${compactTime(time)}`);
-    if (end) lines.push(`DTEND;TZID=Europe/Berlin:${compactDate(date)}T${compactTime(end)}`);
+    if (end) lines.push(`DTEND;TZID=Europe/Berlin:${compactDate(endDate ?? date)}T${compactTime(end)}`);
   } else {
     lines.push(`DTSTART;VALUE=DATE:${compactDate(date)}`);
     lines.push(`DTEND;VALUE=DATE:${compactDate(nextDate(date))}`);
@@ -115,13 +115,17 @@ for (const fileName of fileNames) {
   const date = String(metadata.date ?? "").trim();
   const time = validateTime(String(metadata.time ?? "").trim(), "time", fileName);
   const end = validateTime(String(metadata.end ?? "").trim(), "end", fileName);
+  const endDate = String(metadata.endDate ?? "").trim() || null;
 
   if (!title) throw new Error(`${fileName}: title fehlt.`);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error(`${fileName}: date muss YYYY-MM-DD entsprechen.`);
   if (end && !time) throw new Error(`${fileName}: end darf nur zusammen mit time verwendet werden.`);
-  if (time && end && end <= time) throw new Error(`${fileName}: end muss nach time liegen.`);
+  if (endDate && !/^\d{4}-\d{2}-\d{2}$/.test(endDate)) throw new Error(`${fileName}: endDate muss YYYY-MM-DD entsprechen.`);
+  if (endDate && !end) throw new Error(`${fileName}: endDate darf nur zusammen mit end verwendet werden.`);
+  if (endDate && endDate < date) throw new Error(`${fileName}: endDate darf nicht vor date liegen.`);
+  if (time && end && (endDate ?? date) === date && end <= time) throw new Error(`${fileName}: end muss nach time liegen.`);
 
-  const slug = slugify(fileName.replace(/\.md$/i, "").replace(/^\d{4}_\d{2}_\d{2}_/, ""));
+  const slug = slugify(fileName.replace(/\.md$/i, ""));
   const firstParagraph = markdown.split(/\r?\n\s*\r?\n/).find((block) => !block.startsWith("#")) ?? "";
   const summary = plainText(String(metadata.summary ?? firstParagraph));
   const calendarName = `${slug}.ics`;
@@ -129,7 +133,7 @@ for (const fileName of fileNames) {
 
   await writeFile(
     path.join(calendarDirectory, calendarName),
-    createCalendar({ title, date, time, end, location: metadata.location, summary, slug }),
+    createCalendar({ title, date, time, end, endDate, location: metadata.location, summary, slug }),
     "utf8",
   );
   expectedCalendars.add(calendarName);
@@ -140,6 +144,7 @@ for (const fileName of fileNames) {
     date,
     time,
     end,
+    endDate,
     category: String(metadata.category ?? "Allianz-Event"),
     location: String(metadata.location ?? "").trim() || null,
     summary,

@@ -24,4 +24,4 @@ summary: "Kurze Zusammenfassung für die Terminübersicht."
 Hier stehen weitere Informationen zum Event.
 ```
 
-`time`, `end` und `location` sind optional. Ohne Uhrzeit wird der Termin als ganztägig dargestellt. Zu jedem Termin erzeugt die Website automatisch eine Kalenderdatei zum Import in Smartphone, Outlook oder Google Kalender.
+`time`, `end`, `endDate` und `location` sind optional. `endDate` wird im Format `YYYY-MM-DD` nur für Termine benötigt, die an einem späteren Tag enden. Ohne Uhrzeit wird der Termin als ganztägig dargestellt. Zu jedem Termin erzeugt die Website automatisch eine Kalenderdatei zum Import in Smartphone, Outlook oder Google Kalender.

@@ -12,8 +12,19 @@ const longDate = new Intl.DateTimeFormat("de-DE", {
   year: "numeric",
 }).format(date);
 
+const endDateLabel = event.endDate && event.endDate !== event.date
+  ? new Intl.DateTimeFormat("de-DE", {
+      weekday: "short",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }).format(new Date(`${event.endDate}T12:00:00`))
+  : null;
+
 const timeLabel = event.time
-  ? `${event.time}${event.end ? `–${event.end}` : ""} Uhr`
+  ? event.end && endDateLabel
+    ? `${event.time} Uhr – ${endDateLabel}, ${event.end} Uhr`
+    : `${event.time}${event.end ? `–${event.end}` : ""} Uhr`
   : "Ganztägig";
 ---
 

@@ -12,7 +12,9 @@ Die Bilder werden drei bewusst groben Stilgruppen zugeordnet:
 - **S2 – Fantasy-Comic & Infografik:** text-, panel- oder UI-betonte Darstellung im gemeinsamen DIE-Look
 - **S3 – Chibi-Reaktion:** stark vereinfachte, niedliche und bewusst überzeichnete Reaktionsbilder
 
-Die verbindliche Zuordnung aller vorhandenen Bilder steht im [`STILINDEX.md`](STILINDEX.md). Der Stil wird nicht in den Dateinamen aufgenommen. Neue Bilder werden bei der Prüfung einer bestehenden Gruppe zugewiesen; eine weitere Gruppe wird nur ergänzt, wenn keine der drei vorhandenen Gruppen sinnvoll passt.
+Die verbindliche Zuordnung aller vorhandenen Bilder steht im [`STILINDEX.md`](STILINDEX.md). Der Stil wird nicht in den Dateinamen aufgenommen. Der Website-Build liest den Index als Bildmetadaten ein und stellt die Zuordnung in der Galerie als Badge, Detailangabe und Filter bereit. Neue oder umbenannte Chatbilder ohne gültigen Eintrag lassen den Build bewusst fehlschlagen.
+
+Neue Bilder werden bei der Prüfung einer bestehenden Gruppe zugewiesen; eine weitere Gruppe wird nur ergänzt, wenn keine der drei vorhandenen Gruppen sinnvoll passt.
 
 ## Benennungsregeln
 

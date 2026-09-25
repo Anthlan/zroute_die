@@ -28,6 +28,7 @@ const categories = Object.entries(categoryLabels)
 const people = [...new Set(galleryItems.flatMap((item) => item.people))].sort((left, right) =>
   left.localeCompare(right, "de"),
 );
+const styles = galleryData.styles;
 const dateFormatter = new Intl.DateTimeFormat("de-DE", {
   day: "numeric",
   month: "long",
@@ -100,6 +101,16 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
               </select>
             </div>
 
+            <div class="gallery-select-filter">
+              <label for="style-filter">Stil</label>
+              <select id="style-filter">
+                <option value="all">Alle Stile</option>
+                {styles.map((style) => (
+                  <option value={style.value}>{style.value} – {style.label} ({style.count})</option>
+                ))}
+              </select>
+            </div>
+
             <p class="result-count" id="result-count" aria-live="polite">{galleryItems.length} Bilder</p>
           </div>
 
@@ -109,6 +120,8 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
                 class="gallery-card"
                 data-category={item.category}
                 data-people={item.people.join("|")}
+                data-style={item.style ?? ""}
+                data-style-label={item.styleLabel ?? ""}
                 data-title={item.title}
                 data-date={item.date ?? ""}
                 data-date-label={formatDate(item.date)}
@@ -123,7 +136,10 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
                       loading={index < 8 ? "eager" : "lazy"}
                       decoding="async"
                     />
-                    <span class="category-badge">{item.category}</span>
+                    <span class="gallery-badges">
+                      <span class="category-badge">{item.category}</span>
+                      {item.style && <span class="style-badge" title={item.styleLabel}>{item.style}</span>}
+                    </span>
                   </div>
                   <div class="card-copy">
                     <div>
@@ -139,7 +155,7 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
 
           <div class="gallery-empty" id="gallery-empty" hidden>
             <strong>Keine passenden Bilder gefunden.</strong>
-            <span>Wähle eine andere Kategorie oder Person.</span>
+            <span>Wähle eine andere Kategorie, Person oder einen anderen Stil.</span>
           </div>
         </section>
 
@@ -176,6 +192,7 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
             <dl>
               <div><dt>Personen</dt><dd id="detail-people"></dd></div>
               <div><dt>Datum</dt><dd id="detail-date"></dd></div>
+              <div id="detail-style-row"><dt>Stil</dt><dd id="detail-style"></dd></div>
             </dl>
             <a class="detail-original" id="detail-original" href="#" target="_blank" rel="noopener noreferrer">
               Original auf GitHub öffnen <span aria-hidden="true">↗</span>
@@ -191,6 +208,7 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
       const cards = [...document.querySelectorAll(".gallery-card")];
       const categoryButtons = [...document.querySelectorAll(".category-chip[data-category]")];
       const peopleFilter = document.querySelector("#people-filter");
+      const styleFilter = document.querySelector("#style-filter");
       const resultCount = document.querySelector("#result-count");
       const emptyState = document.querySelector("#gallery-empty");
       const dialog = document.querySelector("#gallery-dialog");
@@ -199,6 +217,8 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
       const detailCategory = document.querySelector("#detail-category");
       const detailPeople = document.querySelector("#detail-people");
       const detailDate = document.querySelector("#detail-date");
+      const detailStyle = document.querySelector("#detail-style");
+      const detailStyleRow = document.querySelector("#detail-style-row");
       const detailOriginal = document.querySelector("#detail-original");
       const detailPosition = document.querySelector("#detail-position");
       const previousButton = document.querySelector("#detail-previous");
@@ -209,11 +229,13 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
 
       function applyFilters() {
         const selectedPerson = peopleFilter.value;
+        const selectedStyle = styleFilter.value;
         visibleCards = cards.filter((card) => {
           const categoryMatches = selectedCategory === "all" || card.dataset.category === selectedCategory;
           const people = (card.dataset.people ?? "").split("|").filter(Boolean);
           const personMatches = selectedPerson === "all" || people.includes(selectedPerson);
-          const visible = categoryMatches && personMatches;
+          const styleMatches = selectedStyle === "all" || card.dataset.style === selectedStyle;
+          const visible = categoryMatches && personMatches && styleMatches;
           card.hidden = !visible;
           return visible;
         });
@@ -230,6 +252,9 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
         detailCategory.textContent = card.dataset.category;
         detailPeople.textContent = card.dataset.people ? card.dataset.people.split("|").join(" · ") : "DIE";
         detailDate.textContent = card.dataset.dateLabel;
+        const hasStyle = Boolean(card.dataset.style);
+        detailStyleRow.hidden = !hasStyle;
+        detailStyle.textContent = hasStyle ? `${card.dataset.style} – ${card.dataset.styleLabel}` : "";
         detailOriginal.href = card.dataset.original;
         detailPosition.textContent = `${currentIndex + 1} / ${visibleCards.length}`;
         previousButton.disabled = visibleCards.length < 2;
@@ -254,6 +279,7 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
       });
 
       peopleFilter.addEventListener("change", applyFilters);
+      styleFilter.addEventListener("change", applyFilters);
       cards.forEach((card) => card.querySelector(".gallery-open").addEventListener("click", () => showCard(card)));
 
       previousButton.addEventListener("click", () => {

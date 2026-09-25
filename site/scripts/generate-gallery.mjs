@@ -8,6 +8,7 @@ const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."
 const repositoryRoot = path.resolve(siteRoot, "..");
 const outputDirectory = path.join(siteRoot, "public", "generated", "gallery");
 const dataFile = path.join(siteRoot, "src", "data", "gallery.generated.json");
+const chatStyleIndexFile = path.join(repositoryRoot, "Galerie", "Chatbilder", "STILINDEX.md");
 const imageExtensions = new Set([".png", ".jpg", ".jpeg", ".webp"]);
 
 const contentAreas = [
@@ -69,6 +70,40 @@ async function walk(directory) {
   }
 
   return files;
+}
+
+async function loadChatStyleIndex() {
+  const content = await readFile(chatStyleIndexFile, "utf8");
+  const styles = [];
+  const labels = new Map();
+  const assignments = new Map();
+  let currentStyle = null;
+
+  for (const line of content.split(/\r?\n/)) {
+    const heading = line.match(/^##\s+(S\d+)\s+[–-]\s+(.+?)\s*$/);
+    if (heading) {
+      const [, value, label] = heading;
+      if (labels.has(value)) throw new Error(`Stil ${value} ist im STILINDEX.md mehrfach definiert.`);
+
+      currentStyle = value;
+      labels.set(value, label);
+      styles.push({ value, label });
+      continue;
+    }
+
+    const imageLink = currentStyle && line.match(/^\s*-\s+\[[^\]]+\]\(([^)]+)\)\s*$/);
+    if (!imageLink) continue;
+
+    const linkedPath = decodeURIComponent(imageLink[1]).replaceAll("\\", "/");
+    const sourcePath = path.posix.normalize(`Galerie/Chatbilder/${linkedPath}`);
+    if (assignments.has(sourcePath)) {
+      throw new Error(`${sourcePath} ist im STILINDEX.md mehrfach zugeordnet.`);
+    }
+    assignments.set(sourcePath, currentStyle);
+  }
+
+  if (!styles.length) throw new Error("Im STILINDEX.md wurden keine Stilgruppen gefunden.");
+  return { assignments, labels, styles };
 }
 
 function humanize(value) {
@@ -168,20 +203,39 @@ await mkdir(outputDirectory, { recursive: true });
 await mkdir(path.dirname(dataFile), { recursive: true });
 
 const previousItems = await loadPreviousItems();
+const chatStyleIndex = await loadChatStyleIndex();
 const sources = [];
 
 for (const [directory, category] of contentAreas) {
   const absoluteDirectory = path.join(repositoryRoot, directory);
   for (const absolutePath of await walk(absoluteDirectory)) {
-    sources.push({ absolutePath, category });
+    const relativePath = path.relative(repositoryRoot, absolutePath).split(path.sep).join("/");
+    sources.push({ absolutePath, category, relativePath });
   }
 }
 
-const items = await mapWithConcurrency(sources, 3, async ({ absolutePath, category }) => {
-  const relativePath = path.relative(repositoryRoot, absolutePath).split(path.sep).join("/");
+const chatSourcePaths = new Set(
+  sources
+    .map(({ relativePath }) => relativePath)
+    .filter((relativePath) => relativePath.startsWith("Galerie/Chatbilder/")),
+);
+const missingStyleAssignments = [...chatSourcePaths].filter((sourcePath) => !chatStyleIndex.assignments.has(sourcePath));
+const orphanedStyleAssignments = [...chatStyleIndex.assignments.keys()].filter((sourcePath) => !chatSourcePaths.has(sourcePath));
+
+if (missingStyleAssignments.length || orphanedStyleAssignments.length) {
+  const issues = [
+    ...missingStyleAssignments.map((sourcePath) => `Stil fehlt: ${sourcePath}`),
+    ...orphanedStyleAssignments.map((sourcePath) => `Bild fehlt: ${sourcePath}`),
+  ];
+  throw new Error(`STILINDEX.md ist nicht vollständig:\n${issues.map((issue) => `- ${issue}`).join("\n")}`);
+}
+
+const items = await mapWithConcurrency(sources, 3, async ({ absolutePath, category, relativePath }) => {
   const fileStats = await stat(absolutePath);
   const fingerprint = `${fileStats.size}-${Math.trunc(fileStats.mtimeMs)}`;
   const metadata = parseMetadata(relativePath, category);
+  const style = chatStyleIndex.assignments.get(relativePath) ?? null;
+  const styleLabel = style ? chatStyleIndex.labels.get(style) : null;
   const hash = crypto.createHash("sha1").update(relativePath).digest("hex").slice(0, 8);
   const id = `${slugify(metadata.title) || "bild"}-${hash}`;
   const thumbnailName = `${id}-thumb.webp`;
@@ -216,6 +270,8 @@ const items = await mapWithConcurrency(sources, 3, async ({ absolutePath, catego
   return {
     id,
     ...metadata,
+    style,
+    styleLabel,
     width,
     height,
     fingerprint,
@@ -247,6 +303,10 @@ const galleryData = {
   imageCount: items.length,
   originalBytes: items.reduce((sum, item) => sum + item.originalBytes, 0),
   generatedBytes,
+  styles: chatStyleIndex.styles.map((style) => ({
+    ...style,
+    count: items.filter((item) => item.style === style.value).length,
+  })),
   items,
 };
 

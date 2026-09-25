@@ -300,7 +300,7 @@ h1 {
 
 .gallery-toolbar {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
   align-items: end;
   gap: 18px;
   margin-bottom: 24px;
@@ -348,17 +348,20 @@ h1 {
   color: var(--gold);
 }
 
-.people-filter {
+.people-filter,
+.gallery-select-filter {
   display: grid;
   gap: 6px;
 }
 
-.people-filter > label {
+.people-filter > label,
+.gallery-select-filter > label {
   color: var(--muted);
   font-size: 12px;
 }
 
-.people-filter select {
+.people-filter select,
+.gallery-select-filter select {
   min-width: 180px;
   height: 38px;
   padding: 0 34px 0 11px;
@@ -368,6 +371,10 @@ h1 {
   color: var(--ink);
   font: inherit;
   font-size: 14px;
+}
+
+.gallery-select-filter select {
+  min-width: 265px;
 }
 
 .result-count {
@@ -437,11 +444,17 @@ h1 {
   box-shadow: 0 0 0 2px rgba(227, 173, 78, 0.2);
 }
 
-.category-badge {
+.gallery-badges {
   position: absolute;
   z-index: 1;
   top: 12px;
   left: 12px;
+  display: flex;
+  gap: 6px;
+}
+
+.category-badge,
+.style-badge {
   padding: 6px 9px;
   border: 1px solid rgba(246, 216, 141, 0.42);
   background: rgba(6, 9, 20, 0.78);
@@ -450,6 +463,11 @@ h1 {
   font-size: 11px;
   letter-spacing: 0.07em;
   text-transform: uppercase;
+}
+
+.style-badge {
+  border-color: rgba(165, 184, 255, 0.4);
+  color: #d3dcff;
 }
 
 .card-copy {
@@ -1845,7 +1863,7 @@ footer a {
   }
 
   .gallery-toolbar {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
   }
 
   .category-list {
@@ -1970,7 +1988,8 @@ footer a {
     flex: 0 0 auto;
   }
 
-  .people-filter select {
+  .people-filter select,
+  .gallery-select-filter select {
     width: 100%;
   }
 
