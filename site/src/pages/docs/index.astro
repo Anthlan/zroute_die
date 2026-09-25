@@ -18,10 +18,10 @@ const usefulDocuments = informationSection
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Tipps, Anleitungen, Strategien, Analysen und Allianzinformationen des DIE-Allianzarchivs."
+      content="Tipps, Anleitungen, Strategien, Analysen und Allianzinformationen der DIE Drachenhalle."
     />
-    <link rel="icon" type="image/svg+xml" href="/zroute_die/favicon.svg" />
-    <title>Nützliches · DIE-Allianzarchiv</title>
+    <link rel="icon" type="image/png" href="/zroute_die/favicon.png" />
+    <title>Nützliches · DIE Drachenhalle</title>
   </head>
   <body>
     <div class="page-shell">
@@ -41,11 +41,11 @@ const usefulDocuments = informationSection
         </section>
 
         <section class="docs-library docs-collection" aria-label="Nützliche Inhalte">
-          <div class="docs-card-grid">
-            {usefulDocuments.map((item) => (
-              <a class="docs-card" href={item.url}>
+          <div class="docs-card-grid is-useful">
+            {usefulDocuments.map((item, index) => (
+              <a class="docs-card" href={item.url} data-index={String(index + 1).padStart(2, "0")}>
                 <span>{item.section}</span>
-                <h3>{item.title}</h3>
+                <h2>{item.title}</h2>
                 <p>{item.summary}</p>
                 <strong>Lesen →</strong>
               </a>

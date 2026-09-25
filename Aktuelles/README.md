@@ -1,6 +1,6 @@
 # Aktuelles
 
-Dieser Ordner enthält bewusst veröffentlichte Meldungen für die Startseite des DIE-Allianzarchivs.
+Dieser Ordner enthält bewusst veröffentlichte Meldungen für die Startseite der DIE Drachenhalle.
 Jede Meldung ist eine eigene Markdown-Datei und beginnt mit einem Metadatenblock.
 
 ## Dateiname

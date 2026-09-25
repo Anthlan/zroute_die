@@ -9,6 +9,8 @@ import eventsData from "../data/events.generated.json";
 const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Berlin" }).format(new Date());
 const upcomingEvents = eventsData.items.filter((event) => event.date >= today);
 const pastEvents = eventsData.items.filter((event) => event.date < today).reverse();
+const visibleUpcomingEvents = upcomingEvents.slice(0, 6);
+const remainingUpcomingEvents = upcomingEvents.slice(6);
 
 const relativeLabel = (date) => {
   const difference = Math.round((new Date(`${date}T12:00:00Z`) - new Date(`${today}T12:00:00Z`)) / 86400000);
@@ -24,8 +26,8 @@ const relativeLabel = (date) => {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Kommende und vergangene Termine der DIE-Allianz." />
-    <link rel="icon" type="image/svg+xml" href="/zroute_die/favicon.svg" />
-    <title>Termine · DIE-Allianzarchiv</title>
+    <link rel="icon" type="image/png" href="/zroute_die/favicon.png" />
+    <title>Termine · DIE Drachenhalle</title>
   </head>
   <body>
     <div class="page-shell">
@@ -59,9 +61,19 @@ const relativeLabel = (date) => {
           </header>
 
           {upcomingEvents.length > 0 ? (
-            <div class="event-list">
-              {upcomingEvents.map((event) => <EventCard event={event} relativeLabel={relativeLabel(event.date)} />)}
-            </div>
+            <>
+              <div class="event-list">
+                {visibleUpcomingEvents.map((event) => <EventCard event={event} relativeLabel={relativeLabel(event.date)} />)}
+              </div>
+              {remainingUpcomingEvents.length > 0 && (
+                <details class="more-events">
+                  <summary>{remainingUpcomingEvents.length} weitere Termine anzeigen</summary>
+                  <div class="event-list">
+                    {remainingUpcomingEvents.map((event) => <EventCard event={event} relativeLabel={relativeLabel(event.date)} />)}
+                  </div>
+                </details>
+              )}
+            </>
           ) : (
             <p class="events-empty">Aktuell sind keine kommenden Events eingetragen.</p>
           )}
@@ -76,9 +88,12 @@ const relativeLabel = (date) => {
               </div>
               <p>Abgelaufene Termine bleiben zur Orientierung sichtbar.</p>
             </header>
-            <div class="event-list">
-              {pastEvents.map((event) => <EventCard event={event} />)}
-            </div>
+            <details class="more-events">
+              <summary>{pastEvents.length} vergangene {pastEvents.length === 1 ? "Veranstaltung" : "Veranstaltungen"} anzeigen</summary>
+              <div class="event-list">
+                {pastEvents.map((event) => <EventCard event={event} />)}
+              </div>
+            </details>
           </section>
         )}
       </main>

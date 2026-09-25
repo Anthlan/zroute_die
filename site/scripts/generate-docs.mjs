@@ -16,7 +16,7 @@ const baseDocuments = [
     slug: "projekt",
     title: "Über das Archiv",
     section: "Projekt",
-    summary: "Zweck, Struktur und Grundidee des öffentlichen DIE-Allianzarchivs.",
+    summary: "Zweck, Struktur und Grundidee der öffentlichen DIE Drachenhalle.",
   },
   {
     source: "ARCHIVREGELN.md",

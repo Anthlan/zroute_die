@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-import docsData from "../data/docs.generated.json";
 import galleryData from "../data/gallery.generated.json";
 
 const galleryItems = galleryData.items;
@@ -29,6 +28,8 @@ const people = [...new Set(galleryItems.flatMap((item) => item.people))].sort((l
   left.localeCompare(right, "de"),
 );
 const styles = galleryData.styles;
+const chatImageCount = galleryItems.filter((item) => item.category === "Chatbild").length;
+const referenceCount = galleryItems.filter((item) => ["Avatar", "Charaktermodell"].includes(item.category)).length;
 const dateFormatter = new Intl.DateTimeFormat("de-DE", {
   day: "numeric",
   month: "long",
@@ -46,10 +47,10 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Das öffentliche Archiv der DIE-Allianz mit Chatbildern, Charaktermodellen, Tipps und Strategien."
+      content="Die Bilderwelt der DIE Drachenhalle mit Chatbildern, Charaktermodellen und Allianzmotiven."
     />
-    <link rel="icon" type="image/svg+xml" href="/zroute_die/favicon.svg" />
-    <title>DIE-Allianzarchiv</title>
+    <link rel="icon" type="image/png" href="/zroute_die/favicon.png" />
+    <title>Galerie · DIE Drachenhalle</title>
   </head>
   <body>
     <div class="page-shell">
@@ -58,24 +59,24 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
       <main id="main-content">
         <section class="archive-intro" aria-labelledby="archive-title">
           <div>
-            <p class="eyebrow">Öffentliches DIE-Archiv</p>
-            <h1 id="archive-title">Bilder, Informationen und Geschichten der Allianz</h1>
+            <p class="eyebrow">Bilder aus der Drachenhalle</p>
+            <h1 id="archive-title">Bilder und Geschichten der Drachenritter</h1>
           </div>
           <p class="intro-copy">
             Durchsuche Chatbilder, Charakterreferenzen und Allianzmaterial. Die Originale bleiben mit ihrer
             vollständigen Qualität und Historie im GitHub-Repository erhalten.
           </p>
-          <dl class="archive-stats" aria-label="Archivumfang">
+          <dl class="archive-stats" aria-label="Umfang der Galerie">
             <div><dt>{galleryData.imageCount}</dt><dd>Bilder</dd></div>
-            <div><dt>{docsData.documentCount}</dt><dd>Dokumente</dd></div>
-            <div><dt>10</dt><dd>Bereiche</dd></div>
+            <div><dt>{chatImageCount}</dt><dd>Chatbilder</dd></div>
+            <div><dt>{referenceCount}</dt><dd>Referenzen</dd></div>
           </dl>
         </section>
 
         <section class="gallery-section" id="galerie" aria-labelledby="gallery-title">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Das vollständige Bildarchiv</p>
+              <p class="eyebrow">Die vollständige Bildsammlung</p>
               <h2 id="gallery-title">Galerie</h2>
             </div>
             <p class="gallery-hint">Bild auswählen, um die größere Ansicht und das Original zu öffnen.</p>
@@ -159,7 +160,7 @@ const formatDate = (date) => date ? dateFormatter.format(new Date(`${date}T00:00
           </div>
         </section>
 
-        <section class="next-sections" aria-label="Weitere Archivbereiche">
+        <section class="next-sections" aria-label="Weitere Bereiche der Drachenhalle">
           <a class="section-link" href="/zroute_die/docs/">
             <span>01</span>
             <h2>Nützliches</h2>

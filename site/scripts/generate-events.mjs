@@ -75,7 +75,7 @@ const createCalendar = ({ title, date, time, end, endDate, location, summary, sl
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//DIE-Allianzarchiv//Termine//DE",
+    "PRODID:-//DIE Drachenhalle//Termine//DE",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",

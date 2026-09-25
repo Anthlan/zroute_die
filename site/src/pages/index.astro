@@ -29,38 +29,51 @@ const relativeLabel = (date) => {
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Neuigkeiten und die letzten Änderungen aus dem öffentlichen DIE-Allianzarchiv."
+      content="Neuigkeiten und die letzten Änderungen aus der öffentlichen DIE Drachenhalle."
     />
-    <link rel="icon" type="image/svg+xml" href="/zroute_die/favicon.svg" />
-    <title>Aktuelles · DIE-Allianzarchiv</title>
+    <link rel="icon" type="image/png" href="/zroute_die/favicon.png" />
+    <title>Aktuelles · DIE Drachenhalle</title>
   </head>
   <body>
     <div class="page-shell">
       <SiteHeader active="news" />
 
       <main class="news-main" id="main-content">
-        <section class="news-hero" aria-labelledby="news-title">
-          <div>
-            <p class="eyebrow">DIE-Allianzarchiv</p>
-            <h1 id="news-title">Aktuelles</h1>
+        <section class="welcome-hero" aria-labelledby="welcome-title">
+          <div class="welcome-copy">
+            <p class="eyebrow">Die Drachenritter · DIE</p>
+            <h1 id="welcome-title">Willkommen in der Drachenhalle</h1>
+            <p>
+              Der gemeinsame Ort für Neuigkeiten, Termine, Wissen und die Geschichten unserer Allianz.
+            </p>
+            <div class="welcome-links">
+              <a href="#neuigkeiten">Was ist neu? <span aria-hidden="true">↓</span></a>
+              <a href="/zroute_die/termine/">Nächste Termine <span aria-hidden="true">→</span></a>
+            </div>
+            <dl class="archive-stats" aria-label="Aktueller Umfang">
+              <div><dt>{newsData.items.length}</dt><dd>Meldungen</dd></div>
+              <div><dt>{upcomingEvents.length}</dt><dd>Nächste Termine</dd></div>
+            </dl>
           </div>
-          <p>
-            Gezielte Neuigkeiten aus der Allianz und ein transparenter Überblick über die zuletzt
-            veröffentlichten Änderungen.
-          </p>
-          <dl class="archive-stats" aria-label="Umfang der Neuigkeiten">
-            <div><dt>{newsData.items.length}</dt><dd>Meldungen</dd></div>
-            <div><dt>{upcomingEvents.length}</dt><dd>Termine</dd></div>
-          </dl>
+          <figure class="welcome-visual">
+            <img
+              src="/zroute_die/brand/die-drachenhalle-willkommen.webp"
+              width="1600"
+              height="900"
+              alt="Von links stehen Somea, mysteryZ, Leader Anthlan, Drachenherz und DaVinci1986 am Strategietisch der Drachenhalle."
+              fetchpriority="high"
+            />
+            <figcaption>Anthlan und die vier offiziellen Offiziere der Drachenritter.</figcaption>
+          </figure>
         </section>
 
-        <section class="news-section" aria-labelledby="news-list-title">
+        <section class="news-section" id="neuigkeiten" aria-labelledby="news-list-title">
           <header class="content-section-heading">
             <div>
               <p class="eyebrow">Gezielt veröffentlicht</p>
               <h2 id="news-list-title">Neuigkeiten</h2>
             </div>
-            <p>Wichtige Meldungen, neue Inhalte und Hinweise aus dem Archiv.</p>
+            <p>Wichtige Meldungen, neue Inhalte und Hinweise aus der Drachenhalle.</p>
           </header>
 
           {newsData.items.length > 0 ? (
@@ -133,7 +146,7 @@ const relativeLabel = (date) => {
           </div>
         </section>
 
-        <section class="next-sections" aria-label="Archivbereiche">
+        <section class="next-sections" aria-label="Bereiche der Drachenhalle">
           <a class="section-link" href="/zroute_die/galerie/">
             <span>01</span>
             <h2>Galerie</h2>

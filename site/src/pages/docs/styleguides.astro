@@ -9,6 +9,7 @@ const styleSection = docsData.sections.find((section) => section.name === "Gesta
 const styleDocuments = styleSection
   ? styleSection.items.map((slug) => itemBySlug.get(slug)).filter(Boolean)
   : [];
+const guideMarks = ["Aa", "Ch", "S1", "ID", "↗", "¶"];
 ---
 
 <!doctype html>
@@ -18,10 +19,10 @@ const styleDocuments = styleSection
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Styleguides für Bildsprache, Gestaltung und Textformatierung des DIE-Allianzarchivs."
+      content="Styleguides für Bildsprache, Gestaltung und Textformatierung der DIE Drachenhalle."
     />
-    <link rel="icon" type="image/svg+xml" href="/zroute_die/favicon.svg" />
-    <title>Styleguides · DIE-Allianzarchiv</title>
+    <link rel="icon" type="image/png" href="/zroute_die/favicon.png" />
+    <title>Styleguides · DIE Drachenhalle</title>
   </head>
   <body>
     <div class="page-shell">
@@ -41,11 +42,12 @@ const styleDocuments = styleSection
         </section>
 
         <section class="docs-library docs-collection" aria-label="Styleguides">
-          <div class="docs-card-grid">
-            {styleDocuments.map((item) => (
+          <div class="docs-card-grid is-styleguides">
+            {styleDocuments.map((item, index) => (
               <a class="docs-card" href={item.url}>
+                <span class="docs-card-mark" aria-hidden="true">{guideMarks[index] ?? "✦"}</span>
                 <span>Styleguide</span>
-                <h3>{item.title}</h3>
+                <h2>{item.title}</h2>
                 <p>{item.summary}</p>
                 <strong>Lesen →</strong>
               </a>

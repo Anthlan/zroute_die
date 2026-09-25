@@ -1,6 +1,6 @@
 # Styleguides
 
-Dieser Ordner enthält die verbindlichen Gestaltungs- und Textregeln des DIE-Archivs. Sie dienen als Grundlage für neue Avatare, Charaktermodelle, Chatbilder und Allianz-Mitteilungen.
+Dieser Ordner enthält die verbindlichen Gestaltungs- und Textregeln der DIE Drachenhalle. Sie dienen als Grundlage für neue Avatare, Charaktermodelle, Chatbilder und Allianz-Mitteilungen.
 
 Änderungen sollten bewusst vorgenommen und mit einem aussagekräftigen Git-Commit festgehalten werden, da sie zukünftige Inhalte beeinflussen.
 

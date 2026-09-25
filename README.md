@@ -1,4 +1,4 @@
-# ZRoute – DIE-Allianzarchiv
+# ZRoute – DIE Drachenhalle
 
 Dieses Repository ist die zentrale, strukturierte Sammlung von Inhalten rund um **Z:Route: Redemption** und die Allianz **DIE**. Seine Hauptbereiche entsprechen direkt der Navigation der [Website](https://anthlan.github.io/zroute_die/).
 

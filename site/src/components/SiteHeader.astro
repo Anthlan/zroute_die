@@ -1,21 +1,27 @@
 ---
 const { active = "" } = Astro.props;
-const repositoryUrl = "https://github.com/Anthlan/zroute_die";
 const inboxUrl = "https://www.dropbox.com/scl/fo/l073m5tkhprle70lmyszw/ALC8vEJfILXuKqpmTWKw6Cg?rlkey=03rjgx0hhnzj7t8u4hsxzyr74&st=c6omhyut&dl=0";
 const uploadUrl = "https://www.dropbox.com/request/4ha3swzj8zyl4mez6j8g";
 ---
 
 <a class="skip-link" href="#main-content">Zum Hauptinhalt springen</a>
 <header class="site-header">
-  <a class="brand" href="/zroute_die/" aria-label="DIE-Allianzarchiv – Startseite">
-    <span class="brand-mark" aria-hidden="true">D<span>I</span>E</span>
+  <a class="brand" href="/zroute_die/" aria-label="DIE Drachenhalle – Startseite">
+    <img
+      class="brand-mark"
+      src="/zroute_die/brand/die-drachenhalle-logo.png"
+      width="52"
+      height="52"
+      alt=""
+      aria-hidden="true"
+    />
     <span class="brand-copy">
-      <strong>Allianzarchiv</strong>
+      <strong>Drachenhalle</strong>
       <small>Z:Route · DIE</small>
     </span>
   </a>
 
-  <nav aria-label="Hauptnavigation">
+  <nav class="desktop-nav" aria-label="Hauptnavigation">
     <a class:list={[{ "is-active": active === "news" }]} href="/zroute_die/">Aktuelles</a>
     <a class:list={[{ "is-active": active === "events" }]} href="/zroute_die/termine/">Termine</a>
     <a class:list={[{ "is-active": active === "gallery" }]} href="/zroute_die/galerie/">Galerie</a>
@@ -24,7 +30,6 @@ const uploadUrl = "https://www.dropbox.com/request/4ha3swzj8zyl4mez6j8g";
   </nav>
 
   <div class="header-actions">
-    <a class="repository-link" href={repositoryUrl}>Repository <span aria-hidden="true">↗</span></a>
     <a class="inbox-link" href={inboxUrl} target="_blank" rel="noopener noreferrer" aria-label="Dropbox-Inbox ansehen (öffnet in neuem Tab)">
       <span class="action-label-full" aria-hidden="true">Inbox ansehen</span>
       <span class="action-label-short" aria-hidden="true">Inbox</span>
@@ -36,4 +41,24 @@ const uploadUrl = "https://www.dropbox.com/request/4ha3swzj8zyl4mez6j8g";
       <span aria-hidden="true">↗</span>
     </a>
   </div>
+
+  <details class="mobile-menu">
+    <summary>
+      <span class="mobile-menu-icon" aria-hidden="true"></span>
+      <span>Menü</span>
+    </summary>
+    <div class="mobile-menu-panel">
+      <nav aria-label="Mobile Hauptnavigation">
+        <a class:list={[{ "is-active": active === "news" }]} href="/zroute_die/">Aktuelles</a>
+        <a class:list={[{ "is-active": active === "events" }]} href="/zroute_die/termine/">Termine</a>
+        <a class:list={[{ "is-active": active === "gallery" }]} href="/zroute_die/galerie/">Galerie</a>
+        <a class:list={[{ "is-active": active === "informationen" }]} href="/zroute_die/docs/">Nützliches</a>
+        <a class:list={[{ "is-active": active === "gestaltung" }]} href="/zroute_die/docs/styleguides/">Styleguides</a>
+      </nav>
+      <div class="mobile-menu-actions">
+        <a class="inbox-link" href={inboxUrl} target="_blank" rel="noopener noreferrer">Inbox ansehen <span aria-hidden="true">↗</span></a>
+        <a class="upload-link" href={uploadUrl} target="_blank" rel="noopener noreferrer">Datei einreichen <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </details>
 </header>
