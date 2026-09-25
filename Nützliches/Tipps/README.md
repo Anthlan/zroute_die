@@ -8,15 +8,22 @@ Für die Gestaltung der Grafiken gilt die verbindliche Richtlinie [`DIE-Stil –
 
 ## Aufbau einer Tipp-Datei
 
-Jede Markdown-Datei soll, soweit für den jeweiligen Tipp sinnvoll, diese Bereiche enthalten:
+Jede Markdown-Datei enthält die vollständige Wissensseite. Optional kann direkt vor der ausführlichen Einordnung eine Kurzfassung ergänzt werden:
 
-1. **Kurzfassung und Grafik** – schnelle Orientierung sowie die aktuelle Tippgrafik.
-2. **Wofür ist dieser Tipp?** – Zweck, Nutzen und geeignete Situationen.
-3. **Funktionsweise und Anleitung** – die Mechanik und ein nachvollziehbarer Ablauf.
-4. **Beispiele und Einordnung** – Berechnungen, Varianten oder Entscheidungshilfen.
-5. **Grenzen und offene Punkte** – Risiken, versionsabhängige Aussagen und noch zu prüfende Details.
-6. **Quellen und Verlässlichkeit** – Ingame-Belege, seriöse externe Quellen und Stand der Prüfung.
-7. **Allianz-Mitteilung zum Kopieren** – der vollständige Ingame-Text in einem `html`-Codeblock, ohne Escape-Zeichen und direkt kopierbar.
+```markdown
+## Das Wichtigste in Kürze
+```
+
+Ist dieser Abschnitt vorhanden, bietet die Website automatisch die Ansichten **„Kurz & knapp“** und **„Ausführlich“** an. Die Kurzansicht enthält ausschließlich diesen Abschnitt und die zugehörige Tippgrafik. Die ausführliche Ansicht beginnt bei `## Wofür ist dieser Tipp?` und enthält alle nachfolgenden Bereiche einschließlich Quellen und kopierbarer Allianz-Mitteilung. Es bleibt bei genau einer Markdown-Datei pro Tipp.
+
+Die ausführliche Wissensseite soll, soweit für den jeweiligen Tipp sinnvoll, diese Bereiche enthalten:
+
+1. **Wofür ist dieser Tipp?** – Zweck, Nutzen und geeignete Situationen.
+2. **Funktionsweise und Anleitung** – die Mechanik und ein nachvollziehbarer Ablauf.
+3. **Beispiele und Einordnung** – Berechnungen, Varianten oder Entscheidungshilfen.
+4. **Grenzen und offene Punkte** – Risiken, versionsabhängige Aussagen und noch zu prüfende Details.
+5. **Quellen und Verlässlichkeit** – Ingame-Belege, seriöse externe Quellen und Stand der Prüfung.
+6. **Allianz-Mitteilung zum Kopieren** – der vollständige Ingame-Text in einem `html`-Codeblock, ohne Escape-Zeichen und direkt kopierbar.
 
 Der HTML-Block übernimmt den freigegebenen Ingame-Text inhaltlich unverändert. Zusatzinformationen gehören in den Wissensartikel und nicht ungeprüft in die Allianz-Mitteilung.
 

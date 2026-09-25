@@ -120,7 +120,60 @@ const overviewLabel = document.section === "Gestaltung" ? "Styleguides" : "Nütz
                 </div>
               </section>
             )}
-            {document.kind === "tip" && document.introHtml && document.tipHtml && document.copyHtml ? (
+            {document.kind === "tip" && document.hasBriefView ? (
+              <div class="tip-viewer" data-tip-viewer>
+                <div class="tip-view-switcher" role="group" aria-label="Ansicht des Tipps auswählen">
+                  <button
+                    type="button"
+                    class="is-active"
+                    aria-pressed="true"
+                    aria-controls="kurz"
+                    data-tip-view-button="brief"
+                  >
+                    Kurz &amp; knapp
+                  </button>
+                  <button
+                    type="button"
+                    aria-pressed="false"
+                    aria-controls="ausfuehrlich"
+                    data-tip-view-button="detail"
+                  >
+                    Ausführlich
+                  </button>
+                </div>
+
+                <div class:list={["tip-switch-layout", { "has-aside-image": document.imageUrl }]}>
+                  <div class="tip-view-content">
+                    <section
+                      id="kurz"
+                      class="markdown-content tip-view tip-view-brief"
+                      data-tip-view="brief"
+                      set:html={document.briefHtml}
+                    />
+                    <section
+                      id="ausfuehrlich"
+                      class="tip-view tip-view-detail"
+                      data-tip-view="detail"
+                    >
+                      <div class="markdown-content tip-detail-intro" set:html={document.detailIntroHtml} />
+                      <div class="markdown-content tip-detail-body" set:html={document.detailBodyHtml} />
+                    </section>
+                  </div>
+
+                  {document.imageUrl && (
+                    <aside class="document-visual tip-shared-visual" aria-label="Zugehörige Tipp-Grafik">
+                      <a href={document.imageRepositoryUrl} target="_blank" rel="noopener noreferrer">
+                        <img src={document.imageUrl} alt={`Grafik zu ${document.title}`} />
+                      </a>
+                      <p>Passende Grafik zum Teilen im Allianzchat.</p>
+                      <a href={document.imageRepositoryUrl} target="_blank" rel="noopener noreferrer">
+                        Originalgrafik auf GitHub öffnen <span aria-hidden="true">↗</span>
+                      </a>
+                    </aside>
+                  )}
+                </div>
+              </div>
+            ) : document.kind === "tip" && document.introHtml && document.tipHtml && document.copyHtml ? (
               <div class="tip-article-body">
                 <section class="markdown-content tip-intro" set:html={document.introHtml} />
                 <div class:list={["tip-main-layout", { "has-aside-image": document.imageUrl }]}> 
@@ -148,5 +201,68 @@ const overviewLabel = document.section === "Gestaltung" ? "Styleguides" : "Nütz
 
       <SiteFooter />
     </div>
+
+    <script>
+      const tipViewers = document.querySelectorAll("[data-tip-viewer]");
+
+      for (const viewer of tipViewers) {
+        if (!(viewer instanceof HTMLElement)) continue;
+
+        const buttons = [...viewer.querySelectorAll("[data-tip-view-button]")];
+        const views = [...viewer.querySelectorAll("[data-tip-view]")];
+
+        const showView = (viewName, updateFragment = false) => {
+          const activeView = viewName === "detail" ? "detail" : "brief";
+          viewer.dataset.activeView = activeView;
+
+          for (const button of buttons) {
+            const isActive = button.getAttribute("data-tip-view-button") === activeView;
+            button.classList.toggle("is-active", isActive);
+            button.setAttribute("aria-pressed", String(isActive));
+          }
+
+          for (const view of views) {
+            const isActive = view.getAttribute("data-tip-view") === activeView;
+            view.classList.toggle("is-active", isActive);
+            view.setAttribute("aria-hidden", String(!isActive));
+          }
+
+          if (updateFragment) {
+            const fragment = activeView === "detail" ? "#ausfuehrlich" : "#kurz";
+            history.replaceState(null, "", fragment);
+          }
+        };
+
+        const viewFromFragment = () => {
+          if (window.location.hash === "#kurz") return "brief";
+          if (window.location.hash === "#ausfuehrlich") return "detail";
+
+          const target = window.location.hash
+            ? document.getElementById(decodeURIComponent(window.location.hash.slice(1)))
+            : null;
+          return target?.closest('[data-tip-view="detail"]') ? "detail" : "brief";
+        };
+
+        viewer.classList.add("is-enhanced");
+        showView(viewFromFragment());
+
+        for (const button of buttons) {
+          button.addEventListener("click", () => {
+            showView(button.getAttribute("data-tip-view-button") ?? "brief", true);
+          });
+        }
+
+        window.addEventListener("hashchange", () => {
+          const activeView = viewFromFragment();
+          showView(activeView);
+          const target = window.location.hash
+            ? document.getElementById(decodeURIComponent(window.location.hash.slice(1)))
+            : null;
+          if (target && window.location.hash !== "#kurz" && window.location.hash !== "#ausfuehrlich") {
+            requestAnimationFrame(() => target.scrollIntoView());
+          }
+        });
+      }
+    </script>
   </body>
 </html>

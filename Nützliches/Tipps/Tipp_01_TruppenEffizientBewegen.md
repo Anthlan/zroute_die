@@ -1,6 +1,14 @@
 # 💡 Tipp #1 – Truppen effizient bewegen
 
-> **Kurzfassung:** Rohstofffelder können sowohl für den Angriff als auch für den Rückzug als Wegpunkt genutzt werden. Schickt eine Truppe zunächst zu einem Rohstofffeld nahe am Ziel und startet den eigentlichen Angriff erst von dort. Nach dem Angriff könnt ihr ein nahes Rohstofffeld anlaufen und sofort „Rückzug“ wählen, um schneller zur Basis zurückzukehren.
+## Das Wichtigste in Kürze
+
+- **Angriff vorbereiten:** Schickt die Truppe zuerst zu einem Rohstofffeld nahe am Ziel und startet den eigentlichen Angriff erst von dort.
+- **Reaktionszeit verkürzen:** Die letzte Angriffsstrecke wird kürzer und der Gegner hat weniger Zeit zum Reagieren. Die Truppe selbst erhält dadurch keinen Geschwindigkeitsbonus.
+- **Direkt weiterkämpfen:** Nach einem Angriff kann eine noch einsatzfähige Truppe unmittelbar das nächste Ziel angreifen.
+- **Schneller zurückziehen:** Lauft nach dem Angriff ein nahes Rohstofffeld an und drückt sofort „Rückzug“. Dadurch wird die schnellere Marschgeschwindigkeit des Rohstofffeld-Marsches für den Rückweg verwendet.
+- **Heilung beachten:** Verwundete können erst nach der Rückkehr zur eigenen Basis geheilt werden.
+
+> **Merksatz:** Rohstofffelder verkürzen den entscheidenden Weg – beim Angriff und beim Rückzug.
 
 ![Tipp 1 – Truppen effizient bewegen](Tipp_01_TruppenEffizientBewegen.png)
 

@@ -1604,6 +1604,132 @@ h1 {
   border-top: 1px solid var(--line);
 }
 
+.tip-view-switcher {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 18px clamp(28px, 5vw, 62px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(6, 9, 20, 0.42);
+}
+
+.tip-viewer.is-enhanced .tip-view-switcher {
+  display: flex;
+}
+
+.tip-view-switcher button {
+  min-height: 42px;
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(10, 15, 34, 0.72);
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.tip-view-switcher button:hover,
+.tip-view-switcher button:focus-visible {
+  border-color: var(--line-bright);
+  color: var(--ink);
+}
+
+.tip-view-switcher button.is-active {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, #efbd5f, #cf8f27);
+  color: #13101a;
+  box-shadow: 0 0 20px rgba(227, 173, 78, 0.14);
+}
+
+.tip-switch-layout.has-aside-image {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  align-items: start;
+}
+
+.tip-view-content {
+  min-width: 0;
+}
+
+.tip-view {
+  max-width: none;
+}
+
+.tip-viewer.is-enhanced .tip-view:not(.is-active) {
+  display: none;
+}
+
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-switch-layout.has-aside-image {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-view-content {
+  display: contents;
+}
+
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-view-detail.is-active {
+  display: contents;
+}
+
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-detail-intro {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-shared-visual {
+  position: static;
+  grid-column: 1;
+  grid-row: 2;
+  padding: clamp(34px, 5vw, 62px);
+  border-top: 1px solid var(--line);
+  border-left: 0;
+}
+
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-detail-body {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-switch-layout:not(.has-aside-image) .tip-detail-body {
+  grid-row: 2;
+}
+
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-shared-visual > a:first-child,
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-shared-visual > p,
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-shared-visual > a:last-child {
+  width: min(720px, 100%);
+  margin-inline: auto;
+}
+
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-shared-visual > p {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.tip-viewer.is-enhanced[data-active-view="detail"] .tip-shared-visual img {
+  max-height: none;
+}
+
+.tip-view h2[id],
+.tip-view h3[id],
+.tip-view h4[id],
+.tip-view h5[id],
+.tip-view h6[id] {
+  scroll-margin-top: 24px;
+}
+
+.tip-view-brief blockquote:last-child,
+.tip-view-brief > :last-child {
+  margin-bottom: 0;
+}
+
+.tip-shared-visual {
+  border-bottom: 1px solid var(--line);
+}
+
 .document-visual {
   position: sticky;
   top: 24px;
@@ -2339,6 +2465,21 @@ footer a {
     grid-template-columns: 1fr;
   }
 
+  .tip-view-switcher {
+    gap: 7px;
+    padding: 14px 20px;
+  }
+
+  .tip-view-switcher button {
+    min-height: 46px;
+    flex: 1;
+    padding-inline: 10px;
+  }
+
+  .tip-switch-layout.has-aside-image {
+    grid-template-columns: 1fr;
+  }
+
   .document-visual img {
     max-height: none;
   }
@@ -2361,6 +2502,75 @@ footer a {
   footer {
     align-items: start;
     flex-direction: column;
+  }
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    background: #fff;
+    color: #111;
+  }
+
+  .page-shell {
+    width: 100%;
+  }
+
+  .site-header,
+  .breadcrumbs,
+  .document-sidebar,
+  .tip-view-switcher,
+  footer {
+    display: none !important;
+  }
+
+  .document-main {
+    padding: 0;
+  }
+
+  .document-layout,
+  .tip-switch-layout.has-aside-image {
+    display: block;
+  }
+
+  .document-article {
+    overflow: visible;
+    border: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  .tip-viewer .tip-view-brief {
+    display: none !important;
+  }
+
+  .tip-viewer .tip-view-detail {
+    display: block !important;
+  }
+
+  .document-visual {
+    position: static;
+    padding: 24px 0;
+    border: 0;
+    break-inside: avoid;
+  }
+
+  .document-visual img {
+    max-height: 50vh;
+  }
+
+  .markdown-content,
+  .document-article > header {
+    color: #111;
+  }
+
+  .markdown-content a,
+  .document-article > header > a {
+    color: #111;
+    text-decoration: underline;
   }
 }
 

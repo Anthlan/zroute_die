@@ -265,6 +265,26 @@ const splitLevelTwoSections = (markdown) => {
   }));
 };
 
+const removeTipMainImage = (markdown, imageUrl) => {
+  if (!imageUrl) return markdown;
+
+  return markdown.replace(/!\[([^\]]*)\]\(([^)\s]+)\)\s*/g, (match, _alt, imageTarget) =>
+    imageTarget === imageUrl ? "" : match,
+  );
+};
+
+const addHeadingIds = (html) => {
+  const usedIds = new Map();
+
+  return html.replace(/<h([2-6])>([\s\S]*?)<\/h\1>/g, (_match, level, content) => {
+    const baseId = slugify(plainText(content)) || "abschnitt";
+    const count = usedIds.get(baseId) ?? 0;
+    usedIds.set(baseId, count + 1);
+    const id = count === 0 ? baseId : `${baseId}-${count + 1}`;
+    return `<h${level} id="${id}">${content}</h${level}>`;
+  });
+};
+
 const items = [];
 
 for (const document of documents) {
@@ -277,6 +297,30 @@ for (const document of documents) {
   const articleMarkdown = normalizedMarkdown.replace(/^#\s+.*?(?:\r?\n)+/, "");
   const html = await marked.parse(articleMarkdown);
   const tipSections = document.kind === "tip" ? splitLevelTwoSections(articleMarkdown) : [];
+  const briefSection = tipSections.find((section) => section.title === "das wichtigste in kürze");
+  const detailStartIndex = tipSections.findIndex((section) => section.title.startsWith("wofür ist dieser tipp"));
+  const detailMarkdown = detailStartIndex >= 0
+    ? tipSections.slice(detailStartIndex).map((section) => section.markdown).join("\n\n")
+    : null;
+  const detailIntroMarkdown = detailStartIndex >= 0
+    ? tipSections[detailStartIndex].markdown
+    : null;
+  const detailBodyMarkdown = detailStartIndex >= 0
+    ? tipSections.slice(detailStartIndex + 1).map((section) => section.markdown).join("\n\n")
+    : null;
+  const hasBriefView = Boolean(briefSection && detailMarkdown);
+  const briefMarkdown = hasBriefView
+    ? removeTipMainImage(briefSection.markdown, document.imageUrl)
+    : null;
+  const cleanedDetailMarkdown = hasBriefView
+    ? removeTipMainImage(detailMarkdown, document.imageUrl)
+    : null;
+  const cleanedDetailIntroMarkdown = hasBriefView
+    ? removeTipMainImage(detailIntroMarkdown, document.imageUrl)
+    : null;
+  const cleanedDetailBodyMarkdown = hasBriefView
+    ? removeTipMainImage(detailBodyMarkdown, document.imageUrl)
+    : null;
   const introSection = tipSections.find((section) => section.title.startsWith("wofür"));
   const mainSection = tipSections.find((section) => section.title === "tipp");
   const copySection = tipSections.find((section) => section.title.startsWith("html-block"));
@@ -288,6 +332,11 @@ for (const document of documents) {
   items.push({
     ...document,
     html,
+    briefHtml: briefMarkdown ? addHeadingIds(await marked.parse(briefMarkdown)) : null,
+    detailHtml: cleanedDetailMarkdown ? addHeadingIds(await marked.parse(cleanedDetailMarkdown)) : null,
+    detailIntroHtml: cleanedDetailIntroMarkdown ? addHeadingIds(await marked.parse(cleanedDetailIntroMarkdown)) : null,
+    detailBodyHtml: cleanedDetailBodyMarkdown ? addHeadingIds(await marked.parse(cleanedDetailBodyMarkdown)) : null,
+    hasBriefView,
     introHtml: introSection ? await marked.parse(introSection.markdown) : null,
     tipHtml: mainSection ? await marked.parse(mainSection.markdown) : null,
     copyHtml: copySection ? await marked.parse(copySection.markdown) : null,
